@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">MyHealthCheck</string>
+    <string name="c_users_user_desktop_hc">C:UsersUserDesktopδιπλωματικηhc</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_connect_user">connectUser</string>
+    <string name="kalws">Καλωσήρθατε!</string>
+    <string name="connect">Εγγραφη/Σύνδεση</string>
+    <string name="menu">MENU</string>
+    <string name="sos">SOS</string>
+    <string name="todo">TODO</string>
+</resources>
