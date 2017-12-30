@@ -22,7 +22,7 @@
  }
  
  //creating a query
- $stmt = $conn->prepare("SELECT FROM  amka, id_d, type, name_exam, result, date ,comments FROM examination");
+ $stmt = $conn->prepare("SELECT amka, id_d, type, name_exam, result, date ,comments FROM examination");
  
  //executing the query 
  $stmt->execute();
@@ -30,7 +30,7 @@
  //binding results to the query 
  $stmt->bind_result($amka, $id_d, $type, $name_exam, $result, $date ,$comments);
  
- $products = array(); 
+ $examines = array(); 
  
  //traversing through all the result 
  while($stmt->fetch()){
@@ -42,8 +42,8 @@
  $temp['result'] = $result; 
  $temp['date'] = $date; 
   $temp['comments'] = $comments; 
- array_push($products, $temp);
+ array_push($examines, $temp);
  }
  
  //displaying the result in json format 
- echo json_encode($products);
+ echo json_encode($examines);

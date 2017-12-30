@@ -7,11 +7,13 @@
     tools:context="com.example.user.myhealthcheck.activity_examinations">
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recylcerView"
+    <!-- this is our listview where we will display the fetched data -->
+    <ListView
+        android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="745dp"
-        tools:layout_editor_absoluteY="-51dp" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
 
 </RelativeLayout>

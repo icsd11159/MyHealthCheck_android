@@ -3,6 +3,7 @@ package com.example.user.myhealthcheck;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -11,7 +12,7 @@ import android.widget.Toast;
  * Created by user on 19/12/2017.
  */
 
-public class Register extends ActionBarActivity {
+public class Register extends AppCompatActivity {
     EditText UsernameEt, PasswordEt,NameEt,SurnameEt,AmkaEt,EmailEt,RePassEt;
     Context context;
     @Override

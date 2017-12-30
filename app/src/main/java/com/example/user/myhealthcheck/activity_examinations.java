@@ -1,106 +1,93 @@
 package com.example.user.myhealthcheck;
 
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.sql.Date;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class activity_examinations extends AppCompatActivity {
-    //this is the JSON Data URL
-    //make sure you are using the correct ip else it will not work
-    private static final String URL_PRODUCTS = "http://192.168.1.2/mypraxis/MyHealthCheck/Api.php";
 
-    //a list to store all the products
-    List<Product> productList;
-
-    //the recyclerview
-    RecyclerView recyclerView;
-
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_examinations);
 
-        //getting the recyclerview from xml
-        recyclerView = (RecyclerView) findViewById(R.id.recylcerView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        //initializing the productlist
-        productList = new ArrayList<>();
-
-        //this method will fetch and parse json
-        //to display it in recyclerview
-        loadProducts();
+        listView = (ListView) findViewById(R.id.listView);
+        getJSON("http://192.168.1.2/mypraxis/MyHealthCheck/Api.php");
     }
 
-    private void loadProducts() {
 
-        /*
-        * Creating a String Request
-        * The request type is GET defined by first parameter
-        * The URL is defined in the second parameter
-        * Then we have a Response Listener and a Error Listener
-        * In response listener we will get the JSON response as a String
-        * */
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_PRODUCTS,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            //converting the string to json array object
-                            JSONArray array = new JSONArray(response);
+    private void getJSON(final String urlWebService) {
 
-                            //traversing through all the object
-                            for (int i = 0; i < array.length(); i++) {
+        class GetJSON extends AsyncTask<Void, Void, String> {
 
-                                //getting product object from json array
-                                JSONObject product = array.getJSONObject(i);
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+            }
 
-                                //adding the product to product list
-                                productList.add(new Product(
-                                        product.getInt("amka"),
-                                        product.getInt("id_d"),
-                                        product.getString("type"),
-                                        product.getString("name_exam"),
-                                        product.getString("result"),
-                                        product.getString("date"),
-                                        product.getString("comments")
-                                ));
-                            }
 
-                            //creating adapter object and setting it to recyclerview
-                            ProductsAdapter adapter = new ProductsAdapter(activity_examinations.this, productList);
-                            recyclerView.setAdapter(adapter);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
+                try {
+                    loadIntoListView(s);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            protected String doInBackground(Void... voids) {
+                try {
+                    URL url = new URL(urlWebService);
+                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                    StringBuilder sb = new StringBuilder();
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                    String json;
+                    while ((json = bufferedReader.readLine()) != null) {
+                        sb.append(json + "\n");
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
+                    return sb.toString().trim();
+                } catch (Exception e) {
+                    return null;
+                }
+            }
+        }
+        GetJSON getJSON = new GetJSON();
+        getJSON.execute();
+    }
 
-                    }
-                });
+    private void loadIntoListView(String json) throws JSONException {
+        JSONArray jsonArray = new JSONArray(json);
+        String[] examines = new String[jsonArray.length()];
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject obj = jsonArray.getJSONObject(i);
+            examines[i] = obj.getString("amka");
+            examines[i] = obj.getString("id_d");
+            examines[i] = obj.getString("type");
+            examines[i] = obj.getString("name_exam");
+            examines[i] = obj.getString("result");
+            examines[i] = obj.getString("date");
+            examines[i] = obj.getString("comments");
 
-        //adding our stringrequest to queue
-        Volley.newRequestQueue(this).add(stringRequest);
+        }
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, examines);
+        listView.setAdapter(arrayAdapter);
     }
 }
