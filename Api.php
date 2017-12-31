@@ -34,14 +34,16 @@
  
  //traversing through all the result 
  while($stmt->fetch()){
- $temp = array();
- $temp['amka'] = $amka; 
-  $temp['id_d'] = $id_d; 
- $temp['type'] = $type; 
- $temp['name_exam'] = $name_exam; 
- $temp['result'] = $result; 
- $temp['date'] = $date; 
-  $temp['comments'] = $comments; 
+	
+ $temp=[
+'amka'=>$amka,
+'id_d'=>$id_d, 
+'type'=>$type, 
+'name_exam'=>$name_exam, 
+'result'=>$result,
+'date' =>$date, 
+'comments'=>$comments
+
  array_push($examines, $temp);
  }
  

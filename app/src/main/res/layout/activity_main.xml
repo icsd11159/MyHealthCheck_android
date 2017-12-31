@@ -61,6 +61,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:background="@color/cast_intro_overlay_button_background_color"
-        android:text="Σύνδεδη/Εγγραφή" />
+        android:text="Σύνδεδη/Εγγραφή!" />
 
 </RelativeLayout>

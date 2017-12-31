@@ -6,7 +6,7 @@ import java.sql.Date;
  * Created by (by Belal)user on 28/12/2017.
  */
 
-public class Product {
+public class Exam {
     private int amka;
     private int id_d;
     private String type;
@@ -15,7 +15,7 @@ public class Product {
    private String date;
     private String comments;
 
-    public Product(int amka, int id_d, String type, String name_exam, String result ,String date, String comments) {
+    public Exam(int amka, int id_d, String type, String name_exam, String result ,String date, String comments) {
         this.amka = amka;
         this.id_d = id_d;
         this.type = type;
