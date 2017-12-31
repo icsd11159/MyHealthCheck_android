@@ -26,38 +26,52 @@ import java.util.List;
 
 public class activity_examinations extends AppCompatActivity {
 
-    ListView listView_amka,listView_idd,listView_type,listView_nameexam,listView_result,listView_date,listView_comments;
+    //ListView listView_amka,listView_idd,listView_type,listView_nameexam,listView_result,listView_date,listView_comments;
     ArrayList<Exam> examList=new ArrayList <Exam>();
     private ArrayList<String> input1 = new ArrayList<String>();
     private TableRow row,row1,row2,row3,row4,row5,row6;
     private TableLayout inflate;
-    private TextView txtcol1, txtcol3,txtcol4,txtcol5,txtcol6,txtcol7,txtcol8,id_d , txtcola3,txtcola4,txtcola5,txtcola6,txtcola7,txtcola8;
-    private String t1="Id Dr:      ";
-    private String t2="Εξέταση:    ";
-     private String t3="Είδος:      ";
-    private String t4="Αποτέλεσμα: ";
-    private String t5="Ημερομηνία: ";
-    private String t6="Σχόλια:     ";
+    private TextView txtcol1, txtcol3,txtcol4,txtcol5,txtcol6,txtcol7,txtcol8,textd;
+    //txtcola3,txtcola4,txtcola5,txtcola6,txtcola7,txtcola8;
+  //  private String t1="Id Dr:"+"      ";
+  //  private String t2="Εξέταση:"+"    ";
+   //  private String t3="Είδος:"+"      ";
+   // private String t4="Αποτέλεσμα:"+" ";
+   // private String t5="Ημερομηνία:"+" ";
+  //  private String t6="Σχόλια:"+"     ";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_examinations);
         inflate = (TableLayout) findViewById(R.id.mytable);
-        id_d = (TextView) findViewById(R.id.textdd);
+        textd = (TextView) findViewById(R.id.textd);
         getJSON("http://192.168.1.2/mypraxis/MyHealthCheck/Api.php");
     }
 
 
     private void getJSON(final String urlWebService) {
-
+        /*
+        * As fetching the json string is a network operation
+        * And we cannot perform a network operation in main thread
+        * so we need an AsyncTask
+        * The constrains defined here are
+        * Void -> We are not passing anything
+        * Void -> Nothing at progress update as well
+        * String -> After completion it should return a string and it will be the json string
+        * */
         class GetJSON extends AsyncTask<Void, Void, String> {
 
+            //this method will be called before execution
+            //you can display a progress bar or something
+            //so that user can understand that he should wait
+            //as network operation may take some time
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
             }
 
-
+            //this method will be called after execution
+            //so here we are displaying a toast with the json string
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
@@ -69,31 +83,55 @@ public class activity_examinations extends AppCompatActivity {
                 }
             }
 
+            //in this method we are fetching the json string
             @Override
             protected String doInBackground(Void... voids) {
+
+
+
                 try {
+                    //creating a URL
                     URL url = new URL(urlWebService);
+
+                    //Opening the URL using HttpURLConnection
                     HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+                    //StringBuilder object to read the string from the service
                     StringBuilder sb = new StringBuilder();
+
+                    //We will use a buffered reader to read the string from service
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+
+                    //A simple string to read values from each line
                     String json;
+
+                    //reading until we don't find null
                     while ((json = bufferedReader.readLine()) != null) {
+
+                        //appending it to string builder
                         sb.append(json + "\n");
                     }
+
+                    //finally returning the read string
                     return sb.toString().trim();
                 } catch (Exception e) {
+
                     return null;
                 }
+
             }
         }
+
+        //creating asynctask object and executing it
         GetJSON getJSON = new GetJSON();
         getJSON.execute();
     }
 
     private void loadIntoListView(String json) throws JSONException {
-
         JSONArray jsonArray = new JSONArray(json);
-       // String[] product = new String[jsonArray.length()];
+
+
+       String[] product = new String[jsonArray.length()];
         for (int i = 0; i < jsonArray.length(); i++) {
 
             JSONObject obj = jsonArray.getJSONObject(i);
@@ -111,19 +149,14 @@ public class activity_examinations extends AppCompatActivity {
 
 
 
-            Context context = getApplicationContext();
-            CharSequence text = "Hello toast! "+examList.size();
-            int duration = Toast.LENGTH_SHORT;
 
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
             row = new TableRow(activity_examinations.this);
             row1 = new TableRow(activity_examinations.this);
             row2 = new TableRow(activity_examinations.this);
             row3 = new TableRow(activity_examinations.this);
             row4 = new TableRow(activity_examinations.this);
             row5 = new TableRow(activity_examinations.this);
-            row6 = new TableRow(activity_examinations.this);
+           row6 = new TableRow(activity_examinations.this);
             txtcol1 = new TextView(activity_examinations.this);
 
 
@@ -138,12 +171,12 @@ public class activity_examinations extends AppCompatActivity {
             }
             row.addView(txtcol1);
             inflate.addView(row);
-            txtcola3 = new TextView(activity_examinations.this);
-            txtcola4 = new TextView(activity_examinations.this);
-            txtcola5 = new TextView(activity_examinations.this);
-            txtcola6 = new TextView(activity_examinations.this);
-            txtcola7 = new TextView(activity_examinations.this);
-            txtcola8 = new TextView(activity_examinations.this);
+           // txtcola3 = new TextView(activity_examinations.this);
+           // txtcola4 = new TextView(activity_examinations.this);
+           // txtcola5 = new TextView(activity_examinations.this);
+           // txtcola6 = new TextView(activity_examinations.this);
+          //  txtcola7 = new TextView(activity_examinations.this);
+          //  txtcola8 = new TextView(activity_examinations.this);
             txtcol3 = new TextView(activity_examinations.this);
             txtcol4 = new TextView(activity_examinations.this);
             txtcol5 = new TextView(activity_examinations.this);
@@ -157,14 +190,14 @@ public class activity_examinations extends AppCompatActivity {
                   //  txtcol2.setText(examList.get(i).getAmka());
 
 
-                    txtcola3.setText(t1);
-                    txtcola4.setText(t2);
-                    txtcola5.setText(t3);
-                    txtcola6.setText(t4);
-                    txtcola7.setText(t5);
-                    txtcola8.setText(t6);
-                    txtcol3.setText(examList.get(i).getId_d());
-                    txtcol4.setText(examList.get(i).getName_exam());
+                   // txtcola3.setText(t1);
+                   // txtcola4.setText(t2);
+                   // txtcola5.setText(t3);
+                   // txtcola6.setText(t4);
+                   // txtcola7.setText(t5);
+                    //txtcola8.setText(t6);
+                    txtcol3.setText(String.valueOf(examList.get(i).getId_d()));
+                    txtcol4.setText(String.valueOf(examList.get(i).getName_exam()));
                     txtcol5.setText(examList.get(i).getType());
                     txtcol6.setText(examList.get(i).getResult());
                     txtcol7.setText(examList.get(i).getDate());
@@ -172,7 +205,7 @@ public class activity_examinations extends AppCompatActivity {
                 }
              else {
                     txtcol1.setText("");
-                txtcol3.setText("");
+                    txtcol3.setText("");
                     txtcol4.setText("");
                     txtcol5.setText("");
                     txtcol6.setText("");
@@ -180,22 +213,22 @@ public class activity_examinations extends AppCompatActivity {
                     txtcol8.setText("");
 
             }
-            this.row1.addView(txtcola7);
+           // this.row1.addView(txtcola7);
             this.row1.addView(txtcol7);
             inflate.addView(row1);
-            this.row2.addView(txtcola3);
+           // this.row2.addView(txtcola3);
             this.row2.addView(txtcol3);
             inflate.addView(row2);
-            this.row2.addView(txtcola4);
+           // this.row2.addView(txtcola4);
             this.row3.addView(txtcol4);
             inflate.addView(row3);
-            this.row2.addView(txtcola5);
+           // this.row2.addView(txtcola5);
             this.row4.addView(txtcol5);
             inflate.addView(row4);
-            this.row2.addView(txtcola6);
+           // this.row2.addView(txtcola6);
             this.row5.addView(txtcol6);
             inflate.addView(row5);
-            this.row2.addView(txtcola8);
+           // this.row2.addView(txtcola8);
             this.row6.addView(txtcol8);
             inflate.addView(row6);
 

@@ -6,8 +6,9 @@
     android:layout_height="wrap_content"
     android:background="@drawable/cell_shape">
 
+
     <TextView
-        android:id="@+id/textide"
+        android:id="@+id/textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/cell_shape"
@@ -24,42 +25,42 @@
         android:text="Ημερομηνία:"
         android:textStyle="bold"
         android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
-        <TextView
-            android:id="@+id/textdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/cell_shape"
-            android:padding="5dp"
-            android:text="Id/phone Dr:"
-            android:textStyle="bold"
-            android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
-        <TextView
-            android:id="@+id/textnam"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/cell_shape"
-            android:padding="5dp"
-            android:text="Εξέταση:"
-            android:textStyle="bold"
-            android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
-        <TextView
-            android:id="@+id/textt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/cell_shape"
-            android:padding="5dp"
-            android:text="Είδος:"
-            android:textStyle="bold"
-            android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
-        <TextView
-            android:id="@+id/textr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/cell_shape"
-            android:padding="5dp"
-            android:text="Αποτέλεσμα:"
-            android:textStyle="bold"
-            android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+    <TextView
+        android:id="@+id/textdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cell_shape"
+        android:padding="5dp"
+        android:text="Id/phone Dr:"
+        android:textStyle="bold"
+        android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+    <TextView
+        android:id="@+id/textnam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cell_shape"
+        android:padding="5dp"
+        android:text="Εξέταση:"
+        android:textStyle="bold"
+        android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+    <TextView
+        android:id="@+id/textt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cell_shape"
+        android:padding="5dp"
+        android:text="Είδος:"
+        android:textStyle="bold"
+        android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+    <TextView
+        android:id="@+id/textr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cell_shape"
+        android:padding="5dp"
+        android:text="Αποτέλεσμα:"
+        android:textStyle="bold"
+        android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
     <TextView
         android:id="@+id/textc"

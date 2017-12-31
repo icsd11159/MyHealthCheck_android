@@ -34,7 +34,7 @@
  
  //traversing through all the result 
  while($stmt->fetch()){
-	
+	  $temp = array(); 
  $temp=[
 'amka'=>$amka,
 'id_d'=>$id_d, 
@@ -43,9 +43,10 @@
 'result'=>$result,
 'date' =>$date, 
 'comments'=>$comments
-
+];
  array_push($examines, $temp);
  }
  
  //displaying the result in json format 
  echo json_encode($examines);
+ 
