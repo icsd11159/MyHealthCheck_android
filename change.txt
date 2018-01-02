@@ -37,3 +37,78 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.2.0'
 
 }
+ listView_amka = (ListView) findViewById(R.id.listView_amka);
+        listView_idd = (ListView) findViewById(R.id.listView_idd);
+        listView_type = (ListView) findViewById(R.id.listView_type);
+        listView_nameexam = (ListView) findViewById(R.id.listView_nameexam);
+        listView_result = (ListView) findViewById(R.id.listView_result);
+        listView_date = (ListView) findViewById(R.id.listView_date);
+        listView_comments = (ListView) findViewById(R.id.listView_comments);
+
+
+
+    <TextView
+        android:id="@+id/textide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cell_shape"
+        android:padding="5dp"
+        android:text="ID:"
+        android:textStyle="bold"
+        android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+    <TextView
+        android:id="@+id/textd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cell_shape"
+        android:padding="5dp"
+        android:text="Ημερομηνία:"
+        android:textStyle="bold"
+        android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+        <TextView
+            android:id="@+id/textdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/cell_shape"
+            android:padding="5dp"
+            android:text="Id/phone Dr:"
+            android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+        <TextView
+            android:id="@+id/textnam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/cell_shape"
+            android:padding="5dp"
+            android:text="Εξέταση:"
+            android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+        <TextView
+            android:id="@+id/textt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/cell_shape"
+            android:padding="5dp"
+            android:text="Είδος:"
+            android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+        <TextView
+            android:id="@+id/textr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/cell_shape"
+            android:padding="5dp"
+            android:text="Αποτέλεσμα:"
+            android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+    <TextView
+        android:id="@+id/textc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cell_shape"
+        android:padding="5dp"
+        android:text="Σχόλια:"
+        android:textStyle="bold"
+        android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+

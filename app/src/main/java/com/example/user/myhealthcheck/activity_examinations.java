@@ -26,26 +26,27 @@ import java.util.List;
 
 public class activity_examinations extends AppCompatActivity {
 
-    //ListView listView_amka,listView_idd,listView_type,listView_nameexam,listView_result,listView_date,listView_comments;
+    TextView listView_amka,listView_idd,listView_type,listView_nameexam,listView_result,listView_date,listView_comments;
     ArrayList<Exam> examList=new ArrayList <Exam>();
     private ArrayList<String> input1 = new ArrayList<String>();
     private TableRow row,row1,row2,row3,row4,row5,row6;
-    private TableLayout inflate;
-    private TextView txtcol1, txtcol3,txtcol4,txtcol5,txtcol6,txtcol7,txtcol8,textd;
-    //txtcola3,txtcola4,txtcola5,txtcola6,txtcola7,txtcola8;
-  //  private String t1="Id Dr:"+"      ";
-  //  private String t2="Εξέταση:"+"    ";
-   //  private String t3="Είδος:"+"      ";
-   // private String t4="Αποτέλεσμα:"+" ";
-   // private String t5="Ημερομηνία:"+" ";
-  //  private String t6="Σχόλια:"+"     ";
+    private TableLayout inflate,inflate2;
+    private TextView txtcol1, txtcol3,txtcol4,txtcol5,txtcol6,txtcol7,txtcol8,textd,txtcola3,txtcola4,txtcola5,txtcola6,txtcola7,txtcola8;
+    private String t1="Id Dr:"+"      ";
+    private String t2="Εξέταση:"+"    ";
+    private String t3="Είδος:"+"      ";
+    private String t4="Αποτέλεσμα:"+" ";
+    private String t5="Ημερομηνία:"+" ";
+    private String t6="Σχόλια:"+"     ";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_examinations);
         inflate = (TableLayout) findViewById(R.id.mytable);
-        textd = (TextView) findViewById(R.id.textd);
-        getJSON("http://192.168.1.2/mypraxis/MyHealthCheck/Api.php");
+        inflate2 = (TableLayout) findViewById(R.id.mytable);
+      
+
+        getJSON("http://192.168.1.18/mypraxis/MyHealthCheck/Api.php");
     }
 
 
@@ -171,12 +172,12 @@ public class activity_examinations extends AppCompatActivity {
             }
             row.addView(txtcol1);
             inflate.addView(row);
-           // txtcola3 = new TextView(activity_examinations.this);
-           // txtcola4 = new TextView(activity_examinations.this);
-           // txtcola5 = new TextView(activity_examinations.this);
-           // txtcola6 = new TextView(activity_examinations.this);
-          //  txtcola7 = new TextView(activity_examinations.this);
-          //  txtcola8 = new TextView(activity_examinations.this);
+            txtcola3 = new TextView(activity_examinations.this);
+            txtcola4 = new TextView(activity_examinations.this);
+            txtcola5 = new TextView(activity_examinations.this);
+            txtcola6 = new TextView(activity_examinations.this);
+            txtcola7 = new TextView(activity_examinations.this);
+            txtcola8 = new TextView(activity_examinations.this);
             txtcol3 = new TextView(activity_examinations.this);
             txtcol4 = new TextView(activity_examinations.this);
             txtcol5 = new TextView(activity_examinations.this);
@@ -190,12 +191,12 @@ public class activity_examinations extends AppCompatActivity {
                   //  txtcol2.setText(examList.get(i).getAmka());
 
 
-                   // txtcola3.setText(t1);
-                   // txtcola4.setText(t2);
-                   // txtcola5.setText(t3);
-                   // txtcola6.setText(t4);
-                   // txtcola7.setText(t5);
-                    //txtcola8.setText(t6);
+                   txtcola3.setText((CharSequence) listView_amka);
+                    txtcola4.setText(t2);
+                    txtcola5.setText(t3);
+                    txtcola6.setText(t4);
+                    txtcola7.setText(t5);
+                    txtcola8.setText(t6);
                     txtcol3.setText(String.valueOf(examList.get(i).getId_d()));
                     txtcol4.setText(String.valueOf(examList.get(i).getName_exam()));
                     txtcol5.setText(examList.get(i).getType());
@@ -213,22 +214,22 @@ public class activity_examinations extends AppCompatActivity {
                     txtcol8.setText("");
 
             }
-           // this.row1.addView(txtcola7);
+            this.row1.addView(txtcola7);
             this.row1.addView(txtcol7);
             inflate.addView(row1);
-           // this.row2.addView(txtcola3);
+            this.row2.addView(txtcola3);
             this.row2.addView(txtcol3);
-            inflate.addView(row2);
-           // this.row2.addView(txtcola4);
+            inflate2.addView(row2);
+            this.row3.addView(txtcola4);
             this.row3.addView(txtcol4);
             inflate.addView(row3);
-           // this.row2.addView(txtcola5);
+            this.row4.addView(txtcola5);
             this.row4.addView(txtcol5);
             inflate.addView(row4);
-           // this.row2.addView(txtcola6);
+            this.row5.addView(txtcola6);
             this.row5.addView(txtcol6);
             inflate.addView(row5);
-           // this.row2.addView(txtcola8);
+            this.row6.addView(txtcola8);
             this.row6.addView(txtcol8);
             inflate.addView(row6);
 
