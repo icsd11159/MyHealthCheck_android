@@ -40,10 +40,10 @@ public class Register extends AppCompatActivity {
         if(repass.equals(password)){
 
 
-        String type = "register";
-        BackgroundWorker backgroundWorker = new BackgroundWorker(this);
-        backgroundWorker.execute(type, username, password ,name,surname,amka,email);
-    }else{
+            String type = "register";
+            BackgroundWorker backgroundWorker = new BackgroundWorker(this);
+            backgroundWorker.execute(type, username, password ,name,surname,amka,email);
+        }else{
             Toast.makeText(context, "Passwords don't match,please write one password!", Toast.LENGTH_SHORT).show();
         }
     }

@@ -20,9 +20,9 @@
  echo "Failed to connect to MySQL: " . mysqli_connect_error();
  die();
  }
- 
+ $amka_user = $_POST["amka_user"];
  //creating a query
- $stmt = $conn->prepare("SELECT amka, id_d, type, name_exam, result, date ,comments FROM examination");
+ $stmt = $conn->prepare("SELECT amka, id_d, type, name_exam, result, date ,comments FROM examination WHERE amka='$amka_user'");
  
  //executing the query 
  $stmt->execute();
@@ -34,7 +34,7 @@
  
  //traversing through all the result 
  while($stmt->fetch()){
-	  $temp = array(); 
+	//  $temp = array(); 
  $temp=[
 'amka'=>$amka,
 'id_d'=>$id_d, 

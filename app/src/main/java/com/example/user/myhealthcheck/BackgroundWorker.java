@@ -25,17 +25,31 @@ import java.net.URLEncoder;
  * Created by ProgrammingKnowledge on 1/5/2016.
  */
 public class BackgroundWorker extends AsyncTask<String,Void,String> {
-    Context context;
+   Context context;
     AlertDialog alertDialog;
-    BackgroundWorker (Context ctx) {
-        context = ctx;
+    DataDownloadListener dataDownloadListener;
+    boolean success=false;
+    String result;
+   BackgroundWorker (Context ctx) {
+       context = ctx;
     }
+  public void setDataDownloadListener(DataDownloadListener dataDownloadListener) {
+      this.dataDownloadListener = dataDownloadListener;
+  }
+    // Alert Dialog Manager
+  //  AlertDialogManager alert = new AlertDialogManager();
+
+    // Session Manager Class
+   // SessionManager session=new SessionManager( Signin.this);
     @Override
     protected String doInBackground(String... params) {
+
         String type = params[0];
         String login_url = "http://192.168.1.2/mypraxis/MyHealthCheck/login.php";
         String register_url = "http://192.168.1.2/mypraxis/MyHealthCheck/register.php";
+
         if(type.equals("login")) {
+
             try {
                 String user_name = params[1];
                 String password = params[2];
@@ -130,24 +144,51 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
     protected void onPostExecute(String result) {
         alertDialog.setMessage(result);
        alertDialog.show();
+       // Toast.makeText(context, "Wrong Username or Password!"+result, Toast.LENGTH_SHORT).show();
+        if(result.equals("login not success")) {
+            set_loginsuccess(false);
+         //   Toast.makeText(context, "Wrong Username or Password!"+result, Toast.LENGTH_SHORT).show();
+            dataDownloadListener.dataDownloadFailed();
+           //alert.showAlertDialog(getApplicationContext(), "Login failed..", "Username/Password is incorrect", false);
 
-        if(result.equals("login success")) {
-
-            context.startActivity(new Intent(context, menu.class));
 
         }else if(result.contains("register")){
             context.startActivity(new Intent(context, Signin.class));
+            set_loginsuccess(false);
+
         }
         else
         {
-            Toast.makeText(context, "Wrong Username or Password!", Toast.LENGTH_SHORT).show();
+            set_amka(result);
+
+            set_loginsuccess(true);
+            dataDownloadListener.dataDownloadedSuccessfully(true);
+
+            context.startActivity(new Intent(context, Signin.class));
+
         }
 
 
 
 
     }
+ public String get_amka(){
+        return result;
+    }
+    public void set_amka(String result){
+        this.result=result;
+    }
+    public void set_loginsuccess(boolean success){
+        this.success=success;
+    }
+    public boolean get_loginsuccess(){
+        return success;
+    }
 
+    public static interface DataDownloadListener {
+        void dataDownloadedSuccessfully(Object data);
+        void dataDownloadFailed();
+    }
     @Override
     protected void onProgressUpdate(Void... values) {
         super.onProgressUpdate(values);

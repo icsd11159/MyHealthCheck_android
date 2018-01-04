@@ -18,15 +18,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class activity_examinations extends AppCompatActivity {
-
-    TextView listView_amka,listView_idd,listView_type,listView_nameexam,listView_result,listView_date,listView_comments;
+    SessionManager session;
+    // TextView listView_amka,listView_idd,listView_type,listView_nameexam,listView_result,listView_date,listView_comments;
     ArrayList<Exam> examList=new ArrayList <Exam>();
     private ArrayList<String> input1 = new ArrayList<String>();
     private TableRow row,row1,row2,row3,row4,row5,row6;
@@ -38,15 +43,16 @@ public class activity_examinations extends AppCompatActivity {
     private String t4="Αποτέλεσμα:"+" ";
     private String t5="Ημερομηνία:"+" ";
     private String t6="Σχόλια:"+"     ";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_examinations);
         inflate = (TableLayout) findViewById(R.id.mytable);
         inflate2 = (TableLayout) findViewById(R.id.mytable);
-      
 
-        getJSON("http://192.168.1.18/mypraxis/MyHealthCheck/Api.php");
+
+        getJSON("http://192.168.1.2/mypraxis/MyHealthCheck/Api.php");
     }
 
 
@@ -99,6 +105,21 @@ public class activity_examinations extends AppCompatActivity {
 
                     //StringBuilder object to read the string from the service
                     StringBuilder sb = new StringBuilder();
+                    session = new SessionManager(activity_examinations.this);
+                    HashMap<String, String> user = session.getUserDetails();
+
+                    // name
+                    String amka_user = user.get(SessionManager.KEY_NAME);
+                    con.setRequestMethod("POST");
+                    con.setDoOutput(true);
+                   // con.setDoInput(true);
+                    OutputStream outputStream = con.getOutputStream();
+                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                    String post_data = URLEncoder.encode("amka_user","UTF-8")+"="+URLEncoder.encode(amka_user,"UTF-8");
+                    bufferedWriter.write(post_data);
+                    bufferedWriter.flush();
+                    bufferedWriter.close();
+                    outputStream.close();
 
                     //We will use a buffered reader to read the string from service
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
@@ -130,9 +151,7 @@ public class activity_examinations extends AppCompatActivity {
 
     private void loadIntoListView(String json) throws JSONException {
         JSONArray jsonArray = new JSONArray(json);
-
-
-       String[] product = new String[jsonArray.length()];
+       // String[] product = new String[jsonArray.length()];
         for (int i = 0; i < jsonArray.length(); i++) {
 
             JSONObject obj = jsonArray.getJSONObject(i);
@@ -140,12 +159,12 @@ public class activity_examinations extends AppCompatActivity {
             input1.add(String.valueOf(i));
             examList.add(new Exam(
                     obj.getInt("amka"),
-            obj.getInt("id_d"),
-             obj.getString("type"),
-            obj.getString("name_exam"),
-            obj.getString("result"),
-           obj.getString("date"),
-            obj.getString("comments")
+                    obj.getInt("id_d"),
+                    obj.getString("type"),
+                    obj.getString("name_exam"),
+                    obj.getString("result"),
+                    obj.getString("date"),
+                    obj.getString("comments")
             ));
 
 
@@ -157,13 +176,13 @@ public class activity_examinations extends AppCompatActivity {
             row3 = new TableRow(activity_examinations.this);
             row4 = new TableRow(activity_examinations.this);
             row5 = new TableRow(activity_examinations.this);
-           row6 = new TableRow(activity_examinations.this);
+            row6 = new TableRow(activity_examinations.this);
             txtcol1 = new TextView(activity_examinations.this);
 
 
-                if ((examList.get(i) != null)) {
+            if ((examList.get(i) != null)) {
 
-                    txtcol1.setText(input1.get(i));
+                txtcol1.setText(input1.get(i));
 
 
 
@@ -186,32 +205,32 @@ public class activity_examinations extends AppCompatActivity {
             txtcol8 = new TextView(activity_examinations.this);
 
 
-                if (examList.get(i) != null) {
+            if (examList.get(i) != null) {
 
-                  //  txtcol2.setText(examList.get(i).getAmka());
+                //  txtcol2.setText(examList.get(i).getAmka());
 
 
-                   txtcola3.setText((CharSequence) listView_amka);
-                    txtcola4.setText(t2);
-                    txtcola5.setText(t3);
-                    txtcola6.setText(t4);
-                    txtcola7.setText(t5);
-                    txtcola8.setText(t6);
-                    txtcol3.setText(String.valueOf(examList.get(i).getId_d()));
-                    txtcol4.setText(String.valueOf(examList.get(i).getName_exam()));
-                    txtcol5.setText(examList.get(i).getType());
-                    txtcol6.setText(examList.get(i).getResult());
-                    txtcol7.setText(examList.get(i).getDate());
-                    txtcol8.setText(examList.get(i).getComments());
-                }
-             else {
-                    txtcol1.setText("");
-                    txtcol3.setText("");
-                    txtcol4.setText("");
-                    txtcol5.setText("");
-                    txtcol6.setText("");
-                    txtcol7.setText("");
-                    txtcol8.setText("");
+                txtcola3.setText(t1);
+                txtcola4.setText(t2);
+                txtcola5.setText(t3);
+                txtcola6.setText(t4);
+                txtcola7.setText(t5);
+                txtcola8.setText(t6);
+                txtcol3.setText(String.valueOf(examList.get(i).getId_d()));
+                txtcol4.setText(String.valueOf(examList.get(i).getName_exam()));
+                txtcol5.setText(examList.get(i).getType());
+                txtcol6.setText(examList.get(i).getResult());
+                txtcol7.setText(examList.get(i).getDate());
+                txtcol8.setText(examList.get(i).getComments());
+            }
+            else {
+                txtcol1.setText("");
+                txtcol3.setText("");
+                txtcol4.setText("");
+                txtcol5.setText("");
+                txtcol6.setText("");
+                txtcol7.setText("");
+                txtcol8.setText("");
 
             }
             this.row1.addView(txtcola7);

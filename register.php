@@ -20,7 +20,7 @@ if(mysqli_num_rows($result))
 else
 	
 {
-	$role=1;
+	$role=1;//giati einai asthenis
 	$hashedPassword = md5($password);
 	 $query = "insert into users 
                             (
