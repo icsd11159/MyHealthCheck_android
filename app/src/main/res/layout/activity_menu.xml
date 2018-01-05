@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/cast_expanded_controller_progress_text_color"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.user.myhealthcheck.menu"
-    android:background="#1d30da">
+    tools:context="com.example.user.myhealthcheck.menu">
 
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:layout_below="@+id/textView2"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="47dp"
-        android:layout_toEndOf="@+id/imageButton3"
-        android:layout_toRightOf="@+id/imageButton3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/notcon"
+        android:layout_marginTop="20dp"
+        android:background="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color"
         android:clickable="true"
         android:src="@mipmap/hc" />
 
@@ -28,41 +27,84 @@
         android:id="@+id/imageButton3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/imageButton2"
-        android:layout_alignRight="@+id/imageButton2"
+        android:layout_alignEnd="@+id/textView2"
+        android:layout_alignRight="@+id/textView2"
         android:layout_below="@+id/imageButton"
-        android:layout_marginTop="33dp"
+        android:clickable="true"
         android:src="@mipmap/sos" />
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="MENU"
-        android:id="@+id/textView2"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:textSize="@dimen/abc_action_bar_stacked_max_height" />
+        android:layout_centerHorizontal="true"
+        android:text="MENU"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorPrimary" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/buttonmain"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/imageButton3"
+        android:layout_toRightOf="@+id/imageButton3"
+        app:srcCompat="@mipmap/back" />
+
+    <TextView
+        android:id="@+id/notcon"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/imageButton6"
+        android:layout_alignRight="@+id/imageButton6"
+        android:layout_below="@+id/textView2"
+        android:text="Για να δείτε τις εξετάσεις σας παρακαλώ συνδεθείτε" />
+
+    <TextView
+        android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/textView2"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_below="@+id/textView2"
-        android:layout_marginEnd="52dp"
-        android:layout_marginRight="52dp"
-        android:src="@mipmap/tel" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/notcon"
+        android:background="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color"
+        android:backgroundTint="@android:color/white"
+        android:text="Οι εξετάσεις μου"
+        android:textColor="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color" />
 
     <Button
-        android:id="@+id/buttonmain"
+        android:id="@+id/sosn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageButton2"
-        android:layout_marginTop="62dp"
-        android:layout_toEndOf="@+id/imageButton2"
-        android:layout_toRightOf="@+id/imageButton2"
-        android:text="back to main" />
+        android:layout_above="@+id/buttonmain"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/imageButton6"
+        android:layout_marginBottom="14dp"
+        android:layout_toEndOf="@+id/imageButton3"
+        android:layout_toRightOf="@+id/imageButton3"
+        android:background="@android:drawable/ic_input_add"
+        android:text="Εισαγωγή SOS αριθμού"
+        android:textColor="?android:attr/textColorSecondary" />
+
+    <ImageButton
+        android:id="@+id/imageButton6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageButton"
+        android:layout_toEndOf="@+id/imageButton3"
+        android:layout_toRightOf="@+id/imageButton3"
+        app:srcCompat="@mipmap/frst" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/imageButton6"
+        android:layout_alignLeft="@+id/imageButton6"
+        android:layout_alignStart="@+id/imageButton6"
+        android:text="Πρώτες Βοήθειες"
+        android:textColor="@color/colorPrimaryDark" />
 
 </RelativeLayout>

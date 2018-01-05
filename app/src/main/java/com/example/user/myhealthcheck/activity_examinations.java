@@ -2,11 +2,14 @@ package com.example.user.myhealthcheck;
 
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -34,7 +37,7 @@ public class activity_examinations extends AppCompatActivity {
     // TextView listView_amka,listView_idd,listView_type,listView_nameexam,listView_result,listView_date,listView_comments;
     ArrayList<Exam> examList=new ArrayList <Exam>();
     private ArrayList<String> input1 = new ArrayList<String>();
-    private TableRow row,row1,row2,row3,row4,row5,row6;
+    private TableRow row,row1,row2,row3,row4,row5,row6,row7;
     private TableLayout inflate,inflate2;
     private TextView txtcol1, txtcol3,txtcol4,txtcol5,txtcol6,txtcol7,txtcol8,textd,txtcola3,txtcola4,txtcola5,txtcola6,txtcola7,txtcola8;
     private String t1="Id Dr:"+"      ";
@@ -43,15 +46,16 @@ public class activity_examinations extends AppCompatActivity {
     private String t4="Αποτέλεσμα:"+" ";
     private String t5="Ημερομηνία:"+" ";
     private String t6="Σχόλια:"+"     ";
-
+  //  Button[] myButton ;
+  //  Button pdf;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_examinations);
         inflate = (TableLayout) findViewById(R.id.mytable);
         inflate2 = (TableLayout) findViewById(R.id.mytable);
-
-
+        // pdf = (Button) findViewById(R.id.pdf);
+      //  pdf.setVisibility(View.GONE);
         getJSON("http://192.168.1.2/mypraxis/MyHealthCheck/Api.php");
     }
 
@@ -177,6 +181,7 @@ public class activity_examinations extends AppCompatActivity {
             row4 = new TableRow(activity_examinations.this);
             row5 = new TableRow(activity_examinations.this);
             row6 = new TableRow(activity_examinations.this);
+            row7 = new TableRow(activity_examinations.this);
             txtcol1 = new TextView(activity_examinations.this);
 
 
@@ -251,6 +256,23 @@ public class activity_examinations extends AppCompatActivity {
             this.row6.addView(txtcola8);
             this.row6.addView(txtcol8);
             inflate.addView(row6);
+            Button btn = new Button(this);
+            btn.setId(i);
+            final int id_ = btn.getId();
+            btn.setText("button " + id_);
+            btn.setBackgroundColor(Color.rgb(70, 80, 90));
+            //linear.addView(btn, params);
+            this.row7.addView(btn);
+
+            inflate.addView(row7);
+            btn = ((Button) findViewById(id_));
+            btn.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
+                    Toast.makeText(view.getContext(),
+                            "Button clicked index = " + id_, Toast.LENGTH_SHORT)
+                            .show();
+                }
+            });
 
         }
     }

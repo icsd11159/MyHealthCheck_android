@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -30,6 +31,8 @@ public class menu extends AppCompatActivity {
         final Context context = this;
 
         ImageButton imgbtn = (ImageButton) findViewById(R.id.imageButton3);
+        Button sosn = (Button) findViewById(R.id.sosn);
+        TextView notcon = (TextView) findViewById(R.id.notcon);
 
         imgbtn.setOnClickListener(new View.OnClickListener() {
 
@@ -43,33 +46,34 @@ public class menu extends AppCompatActivity {
 
         });
         ImageButton imgbtn_ex = (ImageButton) findViewById(R.id.imageButton);
-        if (!session.isLoggedIn()){
 
-            imgbtn_ex.setVisibility(View.GONE);
-        }
-        else{
-            HashMap<String, String> user = session.getUserDetails();
-
-            // name
-            String amka_user = user.get(SessionManager.KEY_NAME);
-            Toast.makeText(getApplicationContext(), "your AMKA: " + amka_user, Toast.LENGTH_SHORT).show();
-            imgbtn_ex.setVisibility(View.VISIBLE);
-
-        }
 
         imgbtn_ex.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+                if (!session.isLoggedIn()){
 
-                Intent menu = new Intent(context, activity_examinations.class);
-                startActivity(menu);
+                    Toast.makeText(getApplicationContext(), "You have to login first: " , Toast.LENGTH_LONG).show();
+                }
+                else{
+                    HashMap<String, String> user = session.getUserDetails();
+
+                    // name
+                    String amka_user = user.get(SessionManager.KEY_NAME);
+                    Toast.makeText(getApplicationContext(), "your AMKA: " + amka_user, Toast.LENGTH_SHORT).show();
+                    Intent menu = new Intent(context, activity_examinations.class);
+                    startActivity(menu);
+
+                }
+
+
 
 
             }
 
         });
-       Button main = (Button) findViewById(R.id.buttonmain);
+       ImageButton main = (ImageButton) findViewById(R.id.buttonmain);
         main.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -77,6 +81,31 @@ public class menu extends AppCompatActivity {
 
                 Intent menu = new Intent(context, MainActivity.class);
                 startActivity(menu);
+
+            }
+
+        });
+
+        sosn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (!session.isLoggedIn()){
+
+                    Toast.makeText(getApplicationContext(), "You have to login first: " , Toast.LENGTH_LONG).show();
+                }
+                else{
+                    HashMap<String, String> user = session.getUserDetails();
+
+                    // name
+                    String amka_user = user.get(SessionManager.KEY_NAME);
+                    Toast.makeText(getApplicationContext(), "your AMKA: " + amka_user, Toast.LENGTH_SHORT).show();
+                    Intent menu = new Intent(context, sos_number.class);
+                    startActivity(menu);
+
+                }
+
+
 
             }
 
