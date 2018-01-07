@@ -1,6 +1,7 @@
 package com.example.user.myhealthcheck;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +14,7 @@ import android.widget.Toast;
  */
 
 public class Register extends AppCompatActivity {
-    EditText UsernameEt, PasswordEt,NameEt,SurnameEt,AmkaEt,EmailEt,RePassEt;
+    EditText UsernameEt, PasswordEt,NameEt,SurnameEt,AmkaEt,EmailEt,RePassEt,Sosn;
     Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,7 @@ public class Register extends AppCompatActivity {
         AmkaEt = (EditText) findViewById(R.id.input_amka);
         EmailEt = (EditText) findViewById(R.id.input_email);
         RePassEt = (EditText) findViewById(R.id.input_reEnterPassword);
-
+        Sosn = (EditText) findViewById(R.id.text_sosnu);
 
     }
     public void OnSignup(View view) {
@@ -37,14 +38,22 @@ public class Register extends AppCompatActivity {
         String amka = AmkaEt.getText().toString();
         String email = EmailEt.getText().toString();
         String repass = RePassEt.getText().toString();
+        String sosn = Sosn.getText().toString();
+        if(sosn.isEmpty()){
+            sosn="0";
+        }
         if(repass.equals(password)){
 
 
             String type = "register";
             BackgroundWorker backgroundWorker = new BackgroundWorker(this);
-            backgroundWorker.execute(type, username, password ,name,surname,amka,email);
+            backgroundWorker.execute(type, username, password ,name,surname,amka,email,sosn);
         }else{
             Toast.makeText(context, "Passwords don't match,please write one password!", Toast.LENGTH_SHORT).show();
         }
+    }
+    public void OnLogin(View view) {
+        Intent menu = new Intent(context, Signin.class);
+        startActivity(menu);
     }
 }

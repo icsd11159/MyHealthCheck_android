@@ -38,7 +38,7 @@ public class activity_examinations extends AppCompatActivity {
     ArrayList<Exam> examList=new ArrayList <Exam>();
     private ArrayList<String> input1 = new ArrayList<String>();
     private TableRow row,row1,row2,row3,row4,row5,row6,row7;
-    private TableLayout inflate,inflate2;
+    private TableLayout inflate;
     private TextView txtcol1, txtcol3,txtcol4,txtcol5,txtcol6,txtcol7,txtcol8,textd,txtcola3,txtcola4,txtcola5,txtcola6,txtcola7,txtcola8;
     private String t1="Id Dr:"+"      ";
     private String t2="Εξέταση:"+"    ";
@@ -53,10 +53,10 @@ public class activity_examinations extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_examinations);
         inflate = (TableLayout) findViewById(R.id.mytable);
-        inflate2 = (TableLayout) findViewById(R.id.mytable);
+    //    inflate2 = (TableLayout) findViewById(R.id.mytable);
         // pdf = (Button) findViewById(R.id.pdf);
       //  pdf.setVisibility(View.GONE);
-        getJSON("http://192.168.1.2/mypraxis/MyHealthCheck/Api.php");
+        getJSON("http://192.168.1.5/mypraxis/MyHealthCheck/Api.php");
     }
 
 
@@ -243,7 +243,7 @@ public class activity_examinations extends AppCompatActivity {
             inflate.addView(row1);
             this.row2.addView(txtcola3);
             this.row2.addView(txtcol3);
-            inflate2.addView(row2);
+            inflate.addView(row2);
             this.row3.addView(txtcola4);
             this.row3.addView(txtcol4);
             inflate.addView(row3);
@@ -259,7 +259,7 @@ public class activity_examinations extends AppCompatActivity {
             Button btn = new Button(this);
             btn.setId(i);
             final int id_ = btn.getId();
-            btn.setText("button " + id_);
+            btn.setText("PDF for Examination: " + id_);
             btn.setBackgroundColor(Color.rgb(70, 80, 90));
             //linear.addView(btn, params);
             this.row7.addView(btn);

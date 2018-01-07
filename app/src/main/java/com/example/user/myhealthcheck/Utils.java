@@ -7,7 +7,7 @@ package com.example.user.myhealthcheck;
  */
 
 public class Utils {
-    public static final String BASE_IP          = "192.168.1.7";
+    public static final String BASE_IP          = "192.168.1.5";
     public static final String LOGIN_URL        = BASE_IP + "mypraxis/MyHealthCheck/login.php";
     public static final String REGISTER_URL     = BASE_IP + "mypraxis/MyHealthCheck/register.php";
 }

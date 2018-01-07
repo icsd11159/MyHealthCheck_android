@@ -1,7 +1,9 @@
 package com.example.user.myhealthcheck;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,9 +40,38 @@ public class menu extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+                final AlertDialog.Builder builder = new AlertDialog.Builder(menu.this);
 
-                Intent menu = new Intent(context, MapsActivity.class);
-                startActivity(menu);
+                builder.setMessage("message:");
+                builder.setTitle("SOS message");
+
+                //Setting message manually and performing action on button click
+                builder.setMessage("Do you want to send sos message to your contact ?");
+                //This will not allow to close dialogbox until user selects an option
+                builder.setCancelable(false);
+                builder.setPositiveButton("Yes, i'm on emergency !", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Toast.makeText(menu.this, "positive button", Toast.LENGTH_SHORT).show();
+                        //builder.finish();
+                        Intent menu = new Intent(context, send_sos_message.class);
+                        startActivity(menu);
+
+                    }
+                });
+                builder.setNegativeButton("No, i am ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //  Action for 'NO' Button
+                        Toast.makeText(menu.this, "negative button", Toast.LENGTH_SHORT).show();
+                        dialog.cancel();
+                    }
+                });
+
+                //Creating dialog box
+                AlertDialog alert = builder.create();
+                //Setting the title manually
+                //alert.setTitle("AlertDialogExample");
+                alert.show();
+
 
             }
 

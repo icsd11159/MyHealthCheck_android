@@ -6,7 +6,7 @@ $fname=$_POST['name_user'];
 $lname=$_POST['surname_user'];
 $amka=$_POST['amka_user'];
 $usermail=$_POST['email_user'];
-
+$sosn=$_POST['sosn'];
 $sql="SELECT * FROM users WHERE username='$fname' OR usermail='$usermail'OR amka='$amka' ";
 $result=mysqli_query($conn,$sql);
 
@@ -30,7 +30,8 @@ else
 								usermail,
                                 password,
                                 role,
-								amka
+								amka,
+								SOSnumber
                             ) 
                             Values
                             (
@@ -39,8 +40,9 @@ else
                                 '$username',
 								'$usermail',
                                 '$hashedPassword',
-                                 $role,
-								 $amka
+                                 '$role',
+								 '$amka',
+								'$sosn'
                             )";
     $result = mysqli_query($conn, $query);
 

@@ -161,6 +161,18 @@
                     android:hint="Re-enter Password"
                     android:inputType="textPassword" />
             </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp">
+            <EditText
+                android:id="@+id/text_sosnu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter SOS number"
+                android:inputType="textShortMessage" />
+        </android.support.design.widget.TextInputLayout>
 
             <!-- Signup Button -->
             <Button
@@ -176,14 +188,15 @@
                 android:layout_marginTop="50dp"
                 android:onClick="OnSignup"/>
 
-            <TextView
+            <Button
                 android:id="@+id/link_login"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
                 android:gravity="center"
                 android:text="Already a member? Login"
-                android:textSize="16dip" />
+                android:textSize="16dip"
+                android:onClick="OnSignup"/>
 
         </LinearLayout>
     </ScrollView>
