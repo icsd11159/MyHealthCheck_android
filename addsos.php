@@ -11,10 +11,14 @@
  define('DB_USER', 'root');
  define('DB_PASS', '');
  define('DB_NAME', 'myhealthcheck');
- 
+$handler = new PDO('mysql:localhost=localhost;dbname=myhealthcheck', 
+  'root', 
+  '',
+  array(PDO::MYSQL_ATTR_INIT_COMMAND => 
+    'SET NAMES utf8;SET CHARACTER SET UTF8;'));
  //connecting to database and getting the connection object
  $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
- 
+ $conn->set_charset('utf8');
  //Checking if any error occured while connecting
  if (mysqli_connect_errno()) {
  echo "Failed to connect to MySQL: " . mysqli_connect_error();

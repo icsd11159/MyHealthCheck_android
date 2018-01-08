@@ -1,5 +1,5 @@
 <?php 
- 
+ header('Content-Type: text/html; charset=utf-8');
  /*
  * Created by Belal Khan
  * website: www.simplifiedcoding.net 
@@ -11,10 +11,10 @@
  define('DB_USER', 'root');
  define('DB_PASS', '');
  define('DB_NAME', 'myhealthcheck');
- 
+
  //connecting to database and getting the connection object
  $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
- 
+ $conn->set_charset('utf8');
  //Checking if any error occured while connecting
  if (mysqli_connect_errno()) {
  echo "Failed to connect to MySQL: " . mysqli_connect_error();

@@ -8,6 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -126,7 +129,7 @@ public class activity_examinations extends AppCompatActivity {
                     outputStream.close();
 
                     //We will use a buffered reader to read the string from service
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream(),"iso-8859-1"));
 
                     //A simple string to read values from each line
                     String json;
@@ -167,7 +170,8 @@ public class activity_examinations extends AppCompatActivity {
                     obj.getString("name_exam"),
                     obj.getString("result"),
                     obj.getString("date"),
-                    obj.getString("comments")
+                    obj.getString("comments"),
+                    obj.getString("file")
             ));
 
 
@@ -226,6 +230,7 @@ public class activity_examinations extends AppCompatActivity {
                 txtcol6.setText(examList.get(i).getResult());
                 txtcol7.setText(examList.get(i).getDate());
                 txtcol8.setText(examList.get(i).getComments());
+               // txtcol9.setText(examList.get(i).getComments());
             }
             else {
                 txtcol1.setText("");
@@ -258,7 +263,7 @@ public class activity_examinations extends AppCompatActivity {
             Button btn = new Button(this);
             btn.setId(i);
             final int id_ = btn.getId();
-            btn.setText("PDF for Examination: " + id_);
+            btn.setText("PDF for : " + id_ + ", "+examList.get(i).getfile());
             btn.setBackgroundColor(Color.rgb(70, 80, 90));
             //linear.addView(btn, params);
             this.row7.addView(btn);
@@ -270,9 +275,41 @@ public class activity_examinations extends AppCompatActivity {
                     Toast.makeText(view.getContext(),
                             "Button clicked index = " + id_, Toast.LENGTH_SHORT)
                             .show();
+                    WebView webView=new WebView(activity_examinations.this);
+                    webView.getSettings().setJavaScriptEnabled(true);
+                    webView.getSettings().setPluginState(WebSettings.PluginState.ON);
+
+                    //---you need this to prevent the webview from
+                    // launching another browser when a url
+                    // redirection occurs---
+                    webView.setWebViewClient(new Callback());
+
+                   // String pdfURL = "http://dl.dropboxusercontent.com/u/37098169/Course%20Brochures/AND101.pdf";
+                    webView.loadUrl(
+                            "http://docs.google.com/gview?embedded=true&url=" + "http://192.168.1.5/mypraxis/MyHealthCheck/src/uploads/"+examList.get(id_+1).getfile());
+
+                    setContentView(webView);
                 }
-            });
+
+                class Callback extends WebViewClient {
+                    @Override
+                    public boolean shouldOverrideUrlLoading(
+                            WebView view, String url) {
+                        return(false);
+                    }
+                }
+
+                        public void onReceivedError(WebView view, int errorCode,
+                                                    String description, String failingUrl) {
+                            Toast.makeText(activity_examinations.this,
+                                    "Internet Connection Not Available!!", Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                }
+
 
         }
+
     }
-}
+

@@ -373,10 +373,10 @@ public class send_sos_message extends FragmentActivity implements OnMapReadyCall
         smsBody.append(",");
         smsBody.append(currentLocation.getLongitude());
         smsBody.append("Πατήστε το λινκ για να μεταφερθείτε στο ακριβές σημείο του ασθενούς ");
-        smsBody.append("http://maps.google.com/maps?saddr=");
-        smsBody.append(currentLocation.getLatitude() / 1E6 );
+        smsBody.append("https://www.google.com/maps/@?api=1&map_action=pano&");
+        smsBody.append(currentLocation.getLatitude() );
         smsBody.append(",");
-        smsBody.append(currentLocation.getLongitude() / 1E6);
+        smsBody.append(currentLocation.getLongitude());
         smsBody.append(" Από την εφαρμογή MyHealthCkeck");
         final String myPackageName = getPackageName();
         //if(SOSnumber.isEmpty() || SOSnumber.equals("0")){ //gia na ginei pio grhgora na stalei mesw ths efarmoghs tou kinhtou built-sms

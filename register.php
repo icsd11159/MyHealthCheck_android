@@ -1,5 +1,6 @@
 <?php
 require "conn.php";
+
 $username=$_POST['user_name'];
 $password=$_POST['password'];
 $fname=$_POST['name_user'];

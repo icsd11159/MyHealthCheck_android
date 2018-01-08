@@ -14,8 +14,9 @@ public class Exam {
     private String result;
    private String date;
     private String comments;
+    private String file;
 
-    public Exam(int amka, int id_d, String type, String name_exam, String result ,String date, String comments) {
+    public Exam(int amka, int id_d, String type, String name_exam, String result ,String date, String comments,String file) {
         this.amka = amka;
         this.id_d = id_d;
         this.type = type;
@@ -23,6 +24,7 @@ public class Exam {
         this.result = result;
         this.date = date;
         this.comments = comments;
+        this.file = file;
     }
 
     public int getAmka() {
@@ -50,5 +52,8 @@ public class Exam {
     }
     public String getComments() {
         return comments;
+    }
+    public String getfile() {
+        return file;
     }
 }

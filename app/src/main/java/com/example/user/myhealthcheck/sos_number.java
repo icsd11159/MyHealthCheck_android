@@ -42,7 +42,7 @@ public class sos_number extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                getJSON("http://192.168.1.2/mypraxis/MyHealthCheck/addsos.php");
+                getJSON("http://192.168.1.5/mypraxis/MyHealthCheck/addsos.php");
             }
 
         });
@@ -130,7 +130,7 @@ public class sos_number extends AppCompatActivity {
                     outputStream.close();
 
                     //We will use a buffered reader to read the string from service
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream(),"iso-8859-1"));
 
                     //A simple string to read values from each line
                     String json;
