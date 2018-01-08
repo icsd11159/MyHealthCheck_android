@@ -9,6 +9,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.provider.Telephony;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
@@ -377,21 +378,28 @@ public class send_sos_message extends FragmentActivity implements OnMapReadyCall
         smsBody.append(",");
         smsBody.append(currentLocation.getLongitude() / 1E6);
         smsBody.append(" Από την εφαρμογή MyHealthCkeck");
-        if(SOSnumber.isEmpty() || SOSnumber.equals("0")){ //gia na ginei pio grhgora na stalei mesw ths efarmoghs tou kinhtou built-sms
+        final String myPackageName = getPackageName();
+        //if(SOSnumber.isEmpty() || SOSnumber.equals("0")){ //gia na ginei pio grhgora na stalei mesw ths efarmoghs tou kinhtou built-sms
             Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+            sendIntent.putExtra("address"  , new String(SOSnumber));
             sendIntent.putExtra("sms_body", smsBody.toString());
             sendIntent.setType("vnd.android-dir/mms-sms");
-            startActivity(sendIntent);}
-            else {
-            try {
-                PendingIntent pi = PendingIntent.getActivity(send_sos_message.this, 0,
-                        new Intent(send_sos_message.this, MainActivity.class), 0);
-                smsManager.sendTextMessage(SOSnumber, null, smsBody.toString(), pi, null);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+            startActivity(sendIntent);
+    //}
+            //else {
+
+            //Intent intent =
+              //      new Intent(Telephony.Sms.Intents.ACTION_CHANGE_DEFAULT);
+            //intent.putExtra(Telephony.Sms.Intents.EXTRA_PACKAGE_NAME,myPackageName);
+           // startActivity(intent);
+
+              //  PendingIntent pi = PendingIntent.getActivity(send_sos_message.this, 0,
+                 //       new Intent(send_sos_message.this, MainActivity.class), 0);
+               // smsManager.sendTextMessage(SOSnumber, null, smsBody.toString(), null, null);
+
+       // }
         Toast.makeText(this, "To SMS στελνεται στον αριθμό "+SOSnumber+" με δική σας χρέωση με το μήνυμα: "+smsBody.toString(), Toast.LENGTH_LONG).show();
+
     }
 
     private void getJSON(final String urlWebService) {
