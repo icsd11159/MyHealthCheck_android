@@ -40,7 +40,7 @@ public class Register extends AppCompatActivity {
         String repass = RePassEt.getText().toString();
         String sosn = Sosn.getText().toString();
         if(sosn.isEmpty()){
-            sosn="0";
+             sosn="0";
         }
         if(repass.equals(password)){
 

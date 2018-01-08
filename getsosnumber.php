@@ -37,7 +37,7 @@
  if($SOSnumber==null|| $history==null){
 	$SOSnumber='0';
 	$history='0';
-}
+ }
  //$temp = array(); 
  $temp=[
 'fname'=>$fname,

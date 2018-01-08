@@ -147,7 +147,6 @@ public class activity_examinations extends AppCompatActivity {
 
             }
         }
-
         //creating asynctask object and executing it
         GetJSON getJSON = new GetJSON();
         getJSON.execute();

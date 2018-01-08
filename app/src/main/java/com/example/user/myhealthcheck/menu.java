@@ -55,7 +55,6 @@ public class menu extends AppCompatActivity {
                         //builder.finish();
                         Intent menu = new Intent(context, send_sos_message.class);
                         startActivity(menu);
-
                     }
                 });
                 builder.setNegativeButton("No, i am ok", new DialogInterface.OnClickListener() {

@@ -486,7 +486,6 @@ public class send_sos_message extends FragmentActivity implements OnMapReadyCall
 
                     return null;
                 }
-
             }
         }
 

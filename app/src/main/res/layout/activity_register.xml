@@ -197,7 +197,6 @@
                 android:text="Already a member? Login"
                 android:textSize="16dip"
                 android:onClick="OnSignup"/>
-
         </LinearLayout>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>
