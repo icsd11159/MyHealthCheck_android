@@ -59,7 +59,7 @@
         android:layout_alignEnd="@+id/imageButton6"
         android:layout_alignRight="@+id/imageButton6"
         android:layout_below="@+id/textView2"
-        android:text="Για να δείτε τις εξετάσεις σας παρακαλώ συνδεθείτε και για να χρησιμοποιήσετε μελλοντικά γρηγορότερα το κουμπί sos εκχωρείστε τώρα αριθμό" />
+        android:text="Για να δείτε τις εξετάσεις σας παρακαλώ συνδεθείτε.Για να εκτελεσθεί γρηγορότερα το κουμπί sos,παρακαλώ, χρησιμοποιήστε την δραστηριότητα 'Εισαγωγή SOS αριθμού'" />
 
     <TextView
         android:id="@+id/textView6"
