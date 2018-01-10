@@ -59,7 +59,7 @@ public class activity_examinations extends AppCompatActivity {
     //    inflate2 = (TableLayout) findViewById(R.id.mytable);
         // pdf = (Button) findViewById(R.id.pdf);
       //  pdf.setVisibility(View.GONE);
-        getJSON("http://192.168.1.5/mypraxis/MyHealthCheck/Api.php");
+        getJSON("http://8d2a7219.ngrok.io/mypraxis/MyHealthCheck/Api.php");
     }
 
 
@@ -263,50 +263,37 @@ public class activity_examinations extends AppCompatActivity {
             Button btn = new Button(this);
             btn.setId(i);
             final int id_ = btn.getId();
-            btn.setText("PDF for : " + id_ + ", "+examList.get(i).getfile());
+            btn.setText("PDF for Exam: " + id_);
             btn.setBackgroundColor(Color.rgb(70, 80, 90));
             //linear.addView(btn, params);
             this.row7.addView(btn);
-
             inflate.addView(row7);
             btn = ((Button) findViewById(id_));
             btn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
-                    Toast.makeText(view.getContext(),
-                            "Button clicked index = " + id_, Toast.LENGTH_SHORT)
-                            .show();
-                    WebView webView=new WebView(activity_examinations.this);
-                    webView.getSettings().setJavaScriptEnabled(true);
-                    webView.getSettings().setPluginState(WebSettings.PluginState.ON);
-
-                    //---you need this to prevent the webview from
-                    // launching another browser when a url
-                    // redirection occurs---
-                    webView.setWebViewClient(new Callback());
-
-                   // String pdfURL = "http://dl.dropboxusercontent.com/u/37098169/Course%20Brochures/AND101.pdf";
-                    webView.loadUrl(
-                            "http://docs.google.com/gview?embedded=true&url=" + "http://192.168.1.5/mypraxis/MyHealthCheck/src/uploads/"+examList.get(id_+1).getfile());
-
-                    setContentView(webView);
-                }
-
-                class Callback extends WebViewClient {
-                    @Override
-                    public boolean shouldOverrideUrlLoading(
-                            WebView view, String url) {
-                        return(false);
+                   // Toast.makeText(view.getContext(), "Button clicked index = " + id_, Toast.LENGTH_SHORT).show();
+                    if (getApplicationContext() != null ){
+                        ViewPdf pdf = new ViewPdf(getApplicationContext());
+                        pdf.downloadPDF(examList.get(id_).getfile());
+                       // pdf.viewPDF(examList.get(id_).getfile());
                     }
+                    else if(activity_examinations.this!= null ){
+                        ViewPdf pdf = new ViewPdf(activity_examinations.this);
+                        pdf.downloadPDF(examList.get(id_).getfile());
+                        pdf.viewPDF(view,examList.get(id_).getfile());
+                    }
+                     else{
+
+                        Toast.makeText(view.getContext(), "Button clicked index = " + id_, Toast.LENGTH_SHORT).show();
+                        ViewPdf pdf = new ViewPdf(getApplicationContext());
+                        pdf.downloadPDF(examList.get(id_).getfile());
+                    }
+
                 }
 
-                        public void onReceivedError(WebView view, int errorCode,
-                                                    String description, String failingUrl) {
-                            Toast.makeText(activity_examinations.this,
-                                    "Internet Connection Not Available!!", Toast.LENGTH_LONG).show();
-                        }
                     });
 
-                }
+            }
 
 
         }

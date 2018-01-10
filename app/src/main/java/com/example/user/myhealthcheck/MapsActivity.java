@@ -122,9 +122,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onClick(View v) {
                 Log.d("onClick", "Button is Clicked");
                 mMap.clear();
-                if (mCurrLocationMarker != null) {
-                    mCurrLocationMarker.remove();
-                }
+
                 String url = getUrl(latitude, longitude, Hospital);
                 Object[] DataTransfer = new Object[2];
                 DataTransfer[0] = mMap;

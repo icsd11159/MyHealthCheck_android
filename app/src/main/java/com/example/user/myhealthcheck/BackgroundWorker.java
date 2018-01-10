@@ -45,8 +45,8 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
     protected String doInBackground(String... params) {
 
         String type = params[0];
-        String login_url = "http://192.168.1.5/mypraxis/MyHealthCheck/login.php";
-        String register_url = "http://192.168.1.5/mypraxis/MyHealthCheck/register.php";
+        String login_url = "http://8d2a7219.ngrok.io/mypraxis/MyHealthCheck/login.php";
+        String register_url = "http://8d2a7219.ngrok.io/mypraxis/MyHealthCheck/register.php";
 
         if(type.equals("login")) {
 

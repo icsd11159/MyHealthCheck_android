@@ -277,7 +277,7 @@ public class send_sos_message extends FragmentActivity implements OnMapReadyCall
         Toast.makeText(send_sos_message.this,"Your Current Location", Toast.LENGTH_LONG).show();
 
         Log.d("onLocationChanged", String.format("latitude:%.3f longitude:%.3f",latitude,longitude));
-        getJSON("http://192.168.1.5/mypraxis/MyHealthCheck/getsosnumber.php");
+        getJSON("http://8d2a7219.ngrok.io/mypraxis/MyHealthCheck/getsosnumber.php");
         //stop location updates
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
