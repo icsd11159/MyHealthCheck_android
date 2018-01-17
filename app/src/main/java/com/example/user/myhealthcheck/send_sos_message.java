@@ -208,7 +208,7 @@ public class send_sos_message extends FragmentActivity implements OnMapReadyCall
         googlePlacesUrl.append("&radius=" + PROXIMITY_RADIUS);
         googlePlacesUrl.append("&type=" + nearbyPlace);
         googlePlacesUrl.append("&sensor=true");
-        googlePlacesUrl.append("&key=" + "AIzaSyATuUiZUkEc_UgHuqsBJa1oqaODI-3mLs0");
+        googlePlacesUrl.append("&key=" + "IzaSyAsM2bEe0mGgnIx0ZtwLoeEjV0H05LEGjk");
         Log.d("getUrl", googlePlacesUrl.toString());
         return (googlePlacesUrl.toString());
     }
@@ -277,7 +277,7 @@ public class send_sos_message extends FragmentActivity implements OnMapReadyCall
         Toast.makeText(send_sos_message.this,"Your Current Location", Toast.LENGTH_LONG).show();
 
         Log.d("onLocationChanged", String.format("latitude:%.3f longitude:%.3f",latitude,longitude));
-        getJSON("http://8d2a7219.ngrok.io/mypraxis/MyHealthCheck/getsosnumber.php");
+        getJSON(" http://0a585c49.ngrok.io/mypraxis/MyHealthCheck/getsosnumber.php");
         //stop location updates
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);

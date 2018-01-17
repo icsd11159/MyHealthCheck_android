@@ -42,7 +42,7 @@ public class sos_number extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                getJSON("http://8d2a7219.ngrok.io/mypraxis/MyHealthCheck/addsos.php");
+                getJSON(" http://0dbfc00e.ngrok.io/mypraxis/MyHealthCheck/addsos.php");
             }
 
         });

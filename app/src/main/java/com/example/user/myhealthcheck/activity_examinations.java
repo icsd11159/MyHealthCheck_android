@@ -1,9 +1,13 @@
 package com.example.user.myhealthcheck;
 
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +29,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -59,7 +64,7 @@ public class activity_examinations extends AppCompatActivity {
     //    inflate2 = (TableLayout) findViewById(R.id.mytable);
         // pdf = (Button) findViewById(R.id.pdf);
       //  pdf.setVisibility(View.GONE);
-        getJSON("http://8d2a7219.ngrok.io/mypraxis/MyHealthCheck/Api.php");
+        getJSON("http://ba31f2d0.ngrok.io/mypraxis/MyHealthCheck/Api.php");
     }
 
 
@@ -175,8 +180,6 @@ public class activity_examinations extends AppCompatActivity {
             ));
 
 
-
-
             row = new TableRow(activity_examinations.this);
             row1 = new TableRow(activity_examinations.this);
             row2 = new TableRow(activity_examinations.this);
@@ -191,7 +194,6 @@ public class activity_examinations extends AppCompatActivity {
             if ((examList.get(i) != null)) {
 
                 txtcol1.setText(input1.get(i));
-
 
 
             } else {
@@ -230,9 +232,8 @@ public class activity_examinations extends AppCompatActivity {
                 txtcol6.setText(examList.get(i).getResult());
                 txtcol7.setText(examList.get(i).getDate());
                 txtcol8.setText(examList.get(i).getComments());
-               // txtcol9.setText(examList.get(i).getComments());
-            }
-            else {
+                // txtcol9.setText(examList.get(i).getComments());
+            } else {
                 txtcol1.setText("");
                 txtcol3.setText("");
                 txtcol4.setText("");
@@ -271,32 +272,20 @@ public class activity_examinations extends AppCompatActivity {
             btn = ((Button) findViewById(id_));
             btn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
-                   // Toast.makeText(view.getContext(), "Button clicked index = " + id_, Toast.LENGTH_SHORT).show();
-                    if (getApplicationContext() != null ){
-                        ViewPdf pdf = new ViewPdf(getApplicationContext());
-                        pdf.downloadPDF(examList.get(id_).getfile());
-                       // pdf.viewPDF(examList.get(id_).getfile());
-                    }
-                    else if(activity_examinations.this!= null ){
-                        ViewPdf pdf = new ViewPdf(activity_examinations.this);
-                        pdf.downloadPDF(examList.get(id_).getfile());
-                        pdf.viewPDF(view,examList.get(id_).getfile());
-                    }
-                     else{
+                    // Toast.makeText(view.getContext(), "Button clicked index = " + id_, Toast.LENGTH_SHORT).show();
 
-                        Toast.makeText(view.getContext(), "Button clicked index = " + id_, Toast.LENGTH_SHORT).show();
-                        ViewPdf pdf = new ViewPdf(getApplicationContext());
-                        pdf.downloadPDF(examList.get(id_).getfile());
-                    }
+                    // ViewPdf pdf = new ViewPdf();
+                    // pdf.downloadPDF(examList.get(id_).getfile());
+                    //Run the code in a different thread than the UI thread
+                    //  Thread thread = new Thread() {
+                    //   @Override
+                    //public void run() {
+                    Intent i = new Intent(getApplicationContext(), pdf_open.class);
 
+                    i.putExtra("key", examList.get(id_).getfile());
+                    startActivity(i);
                 }
+            });
+        }}}
 
-                    });
-
-            }
-
-
-        }
-
-    }
 

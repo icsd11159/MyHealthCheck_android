@@ -8,6 +8,7 @@
 </head>
 <body class="container">
 <?php
+require "utilities/connectWithDB.php";
 include_once "page_parts/header.php";
 ?>
 
@@ -38,7 +39,7 @@ include_once "page_parts/login_checker.php";
     <br>
     <table class="table">
         <?php
-
+         //  session_start();
         if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['apply'])) {
             echo"<br> id:".$_SESSION['user_id'];
 
@@ -115,28 +116,37 @@ echo '</form>';
                     
                     echo '<td>';
                     echo '<form action="examines.php" method="post" enctype="multipart/form-data">';
+
                	 echo '<form action="search_clients.php" method="post" enctype="multipart/form-data">';
                   
                    
-					    echo ' <input type="hidden" name="size" value="1000000" />';
-                     echo '<input type="file" name="file" />';
-					 echo '<button type="submit" name="btn-upload">upload</button>';
+					
 		 echo '</form>';
-                    echo '<button type="submit" name="examine" class="btn btn-primary">Εξετάσεις Ασθενούς</button>';
-					echo '<button type="submit" value="' . $row['amka'] . '" name="new_examine" class="btn btn-primary">Νέα Εξέταση</button>';
+                  //  echo '<button type="submit" name="examine" class="btn btn-primary">Εξετάσεις Ασθενούς</button>';
+				
                     echo '</form>';
                     echo '</td>';
 					 echo '<td>';
-						echo '<form action="upload_pdf.php" method="post" enctype="multipart/form-data">';
+					 $id_e=$row['id_e'];
+					  echo "id εξετασης: ",$id_e;
+					   $_SESSION['id_e'] = $id_e;
+
+					// echo '<button type="submit" action="upload_pdf.php" name="upload" method="post"  class="btn btn-primary">Ανεβάστε PDF εξέτασης</button>';
+						echo '<form action="upload_pdf.php"  method="post" enctype="multipart/form-data">';
+                   echo '<input type="hidden" id="id_e" name="id_e" >';
                   
-                   
-					    echo '<input type="hidden" name="size" value="1000000" />';
-						 echo " Ανεβάστε το pdf της εξέτασης:";
-                    echo '<input type="file" name="file" />';
-					echo '<button type="submit" name="upload">upload</button>';
-		echo '</form>';
-		 echo '</td>';
-                    echo '</tr>';
+					//	 echo " Ανεβάστε το pdf της εξέτασης:";
+              
+   echo '<input type="hidden" id="id_e" name="id_e"  value='.$id_e.' >';
+				//	echo'<button type="submit"  name="upload">upload</button>';
+		
+		?>
+		<a href="upload_pdf.php?id_e=<?php echo $id_e ?>">Ανεβάστε το pdf της εξέτασης:</a>
+		<?php
+		echo'</form>';
+	echo'</td>';
+              echo' </tr>';
+		
 					}
                 }
 		   
@@ -194,10 +204,25 @@ echo '</form>';
                     echo '<td>';
                     echo '<form action="examines.php" method="post" enctype="multipart/form-data">';
 
-                    echo '<button type="submit" name="examine" class="btn btn-primary">Εξετάσεις Ασθενούς</button>';
+                  //  echo '<button type="submit" name="examine" class="btn btn-primary">Εξετάσεις Ασθενούς</button>';
 					echo '<button type="submit" value="' . $row['amka'] . '" name="new_examine" class="btn btn-primary">Νέα Εξέταση</button>';
                     echo '</form>';
                     echo '</td>';
+					 echo '<td>';
+					 $id_e=$row['id_e'];
+					 echo "id εξετασης: ",$id_e;
+					   $_SESSION['id_e'] = $id_e;
+					// echo '<button type="submit" action="upload_pdf.php" name="upload" method="post"  class="btn btn-primary">Ανεβάστε PDF εξέτασης</button>';
+						echo '<form action="upload_pdf.php"  method="post" enctype="multipart/form-data">';
+                   echo '<input type="hidden" id="id_e" name="id_e" >';
+                  
+					  
+						// echo " ";
+                   ?>
+				   	<a href="upload_pdf.php?id_e=<?php echo $id_e ?>">Ανεβάστε το pdf της εξέτασης:</a>
+					<?php
+		echo '</form>';
+		 echo '</td>';
                     echo '</tr>';
 					}
                 }

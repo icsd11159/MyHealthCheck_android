@@ -1,6 +1,7 @@
 <html>
 <head>
     <?php
+	require "utilities/connectWithDB.php";
     include_once "page_parts/head.php";
     ?>
 </head>
@@ -27,6 +28,7 @@ include_once "page_parts/login_checker.php";
 		 
      
     </form>
+	
 	 <form action="search_clients.php" method="post" enctype="multipart/form-data">
 	   <center>
             <button type="submit" name="view_all" class="btn btn-primary">Εμφάνιση των Ασθενών</button>
@@ -59,18 +61,20 @@ $amka = $_POST['new_examine'];
 		
 	
 		 showAlertDialogMethod( "Amka client is :".$amka.".");
-		// $id_c= $_POST['id_c'];
+		 $_SESSION['amka'] = $amka;
+		$id_c= $_POST['id_c'];
+		 $_SESSION['id_c'] = $id_c;
 		  echo '<form action="search_clients.php" method="post" enctype="multipart/form-data">';
 		 	 // echo '<input type="hidden" id="id_c" name="id_c" value="'.$id_c.'">;
                     echo '<input type="hidden" id="amka" name="amka" value="'.$amka.'">';
 		 ?>
-<div class="page_content">
-    <form action="search_clients.php" method="post" enctype="multipart/form-data">
-        <div class="form-group">
+
+		
             <label for="lessons-selector">Τύπος Εξέτασης:</label>
-            <div class="input-group">
+            <div class="input-group"  >
                 <select class="form-control" name="type" type="text" id="type"
-                        style="margin-top: 10px;margin-bottom: 10px">
+                        style="margin-top: 10px;margin-bottom: 10px" >
+ 
                     <?php
                     
 
@@ -78,19 +82,65 @@ $amka = $_POST['new_examine'];
                         echo '<option value="ourologikh"> Ουρολογική</option>';
 						echo '<option value="aimatologikh"> Αιματολογική</option>';
 						echo '<option value="kolpikh"> Κολπική</option>';
-                    
+                        echo '<option value="anosologikh"> Ανοσολογική</option>';
+					    echo '<option value="allergiologikh"> Αλλεργιολογική</option>';
+					    echo '<option value="vioximikh"> Βιοχημική</option>';
+					    echo '<option value="kalliergeia"> Καλλιέργεια</option>';
+					    echo '<option value="ormonikh"> Ορμονική</option>';
+					  
                     ?>
                 </select>
                 <span class="input-group-btn">
-                        <button type="button" id="type" name="type" class="btn btn-success form-control">Προσθήκη</button>
+                        <button type="submit"  id="submit"   name="submit" class="btn btn-success form-control">Προσθήκη</button>
+					
+                    </span>
+            </div>
+			
+        </div>
+		 
+			<?php
+		 }
+	 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['type'])) {
+		 $type =  $_POST['type'];
+		   echo "Τύπος εξέτασης :",$type;
+		   $_SESSION['type'] = $type;
+		    $amka = $_SESSION['amka']; 
+	?>
+	<div class="page_content">
+    <form  method="post" action="search_clients.php" enctype="multipart/form-data">
+        <div class="form-group" action="search_clients.php" method="post">
+		<div class="form-group">
+            <label for="lessons-selector">Όνομα Εξέτασης*:</label>
+            <div class="input-group">
+                <select class="form-control" name="name_exam" type="text" id="name_exam"
+                        style="margin-top: 10px;margin-bottom: 10px" action="" >
+                    <?php
+					
+    
+                                   
+                       if ($_POST['type']=="ourologikh"){
+                        echo '<option value="mini"> Mini check-up για ενήλικες</option>';
+						echo '<option value="anaimia1"> Έλεγχος αναιμίας Ι</option>';
+						echo '<option value="anaimia11"> Έλεγχος αναιμίας ΙΙ</option>';
+                        echo '<option value="anaimia111"> Έλεγχος αναιμίας ΙΙI</option>';
+					    echo '<option value="thuroeidhs"> Έλεγχος θυρεοειδούς ΙΙΙ</option>';
+					    echo '<option value="prosantres"> Έλεγχος προστάτη II (άνδρες >45 ετών)</option>';
+					    echo '<option value="antixa"> Anti XA</option>';
+					    echo '<option value="apcr"> APC-R</option>';
+							}
+							else{
+								  echo '<option value="anaimia111"> Έλεγχος αναιμίας ΙΙI</option>';
+					    echo '<option value="thuroeidhs"> Έλεγχος θυρεοειδούς ΙΙΙ</option>';
+							}
+			
+                    ?>
+                </select>
+                <span class="input-group-btn">
+                        <button type="submit" id="name_exam" name="name_exam" action="" class="btn btn-success form-control">Προσθήκη</button>
                     </span>
             </div>
         </div>
-        <div class="form-group">
-            <label for="csurname">Όνομα Εξέτασης*:</label>
-            <input required="required" type="text" class="form-control" id="name_exam" name="name_exam"
-                   placeholder="Όνομα Εξέτασης">
-        </div>
+
 		   
         <div class="form-group">
             <label for="amka">Αποτέλεσμα*:</label>
@@ -102,6 +152,7 @@ $amka = $_POST['new_examine'];
             <input required="required" type="date" class="form-control" id="date" name="date"
                    placeholder="Ημερομηνία Εξέτασης">
 	
+		 
 	 
         </div>
         <div class="form-group">
@@ -111,56 +162,52 @@ $amka = $_POST['new_examine'];
         </div>
 		
 
-        <button type="submit" name="add_exam" id="add_exam" class="btn btn-primary">Προσθήκη Εξέτασης και Εγγράφου</button>
+        <button type="submit" name="add_exam"  id="add_exam" class="btn btn-primary">Προσθήκη Εξέτασης </button>
 
 
     </form>
 </div>
 <?php
-}
- 
-		
-
-        
-    
-		 
+	
+	 }
 
 		 
 		 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['add_exam'])) {
 		   $id_doctor= $_SESSION['user_id'];
-		 $amka= $_POST['amka'];
-		
-		    $type =  $_POST['type'];
+		  $type = $_SESSION['type']; 
+		 $amka= $_SESSION['amka'];
+	
+		//$id_c=get_user_by_amka($link, $amka);
+			$id_c= $_SESSION['id_c'];
+ 
+	echo " id c  ",$id_c;	
     $result =$_POST['result'];
     $name_exam =  $_POST['name_exam'];
     $comments = $_POST['comments'];
     $date =  $_POST['date'];
 	
-    if (empty($type) || empty($result) || empty($name_exam) || empty($comments) || empty($date)  ) {
+    if (empty($id_c) ||empty($amka) || empty($id_doctor) || empty($type) || empty($result) || empty($name_exam) || empty($comments) || empty($date)  ) {
         showAlertDialogMethod("Συμπληρωστε τα πεδία");
         exit();
     }
 	
-	
-           $id_e= add_exams($link, $id_doctor, $amka, $type, $name_exam, $result, $date , $comments);
+
+      $id_e = add_exams($link, $id_c, $id_doctor, $amka, $type, $name_exam, $result, $date , $comments);
+		 if($id_e==true){
+			 showAlertDialogMethod("done");
+		 }
+		 else{
+			 showAlertDialogMethod("not done");
+		 }
 		 
-		 
-            if ($id_e == null) {
+		 ?>
+		 	<a href="upload_pdf.php?id_e=<?php echo 8 ?>">Ανεβάστε το pdf της εξέτασης:</a>
+			<?php
+          
 
-                echo '<h5>Δεν βρέθηκαν αποτελέσματα</h5>';
-
-
-            } else {
-               
-					 while ($row = $id_e->fetch_assoc())
-				{
-					 showAlertDialogMethod("id εξετασης".$row['id_e'].".");
-				}
-				   }
-?>
-		
-		<?php
 }
+
+ 	
 		  if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['view_all'])) {
             $all_clients = get_client($link);
 			
@@ -210,15 +257,8 @@ $amka = $_POST['new_examine'];
 				    echo '<form action="search_clients.php" method="post" enctype="multipart/form-data">';
 					echo '<input type="hidden" id="id_c" name="id_c" value="' . $row['id_c'] . '">';
                     echo '<input type="hidden" id="amka" name="amka" value="' . $row['amka'] . '">';
-				$amka=$row['amka'];
-			   $id_e=$row['id_e'];
-
-
-//$_SESSION['new_examine'] = $row['amka'];
-
-
-                  //  echo '<button type="submit" name="examine" class="btn btn-primary">Εξετάσεις Ασθενούς</button>';
-					echo '<button type="submit" value="'.$amka.'"  name="new_examine" class="btn btn-primary">Νέα Εξέταση</button>';
+                     
+					echo '<button type="submit" value="'.$row['amka'].'"   name="new_examine" class="btn btn-primary">Νέα Εξέταση</button>';
                     echo '</form>';
                     echo '</td>';
                     echo '</tr>';
@@ -286,8 +326,10 @@ $amka = $_POST['new_examine'];
                 }
             }
         }
+		
         ?>
     </table>
+
 </div>
 
 </body>
