@@ -50,7 +50,13 @@ echo "ide2 now :",$id_e;
 		$file_size = $_FILES['file']['size'];
 		$file_type = $_FILES['file']['type'];
 	//	$folder="uploads/";
- $target_dir = "uploads/";
+	$id=(string)$id_e;
+	//$id_e=$id+"/";
+	if (!file_exists("".$id."")) {
+    mkdir("".$id."", 0777, true);
+}
+
+ $target_dir = ("".$id."/");
     $folder = $target_dir . basename($_FILES["file"]["name"]);
 		move_uploaded_file($_FILES['file']['tmp_name'],$folder);
 $id_e = mysqli_real_escape_string($link,$id_e);

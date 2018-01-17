@@ -15,10 +15,12 @@ public class Exam {
    private String date;
     private String comments;
     private String file;
+    private int id_e;
 
-    public Exam(int amka, int id_d, String type, String name_exam, String result ,String date, String comments,String file) {
+    public Exam(int amka, int id_d,int id_e, String type, String name_exam, String result ,String date, String comments,String file) {
         this.amka = amka;
         this.id_d = id_d;
+        this.id_e = id_e;
         this.type = type;
         this.name_exam = name_exam;
         this.result = result;
@@ -33,6 +35,10 @@ public class Exam {
 
     public int getId_d() {
         return  id_d;
+    }
+
+    public int getId_e() {
+        return  id_e;
     }
 
     public String getType() {

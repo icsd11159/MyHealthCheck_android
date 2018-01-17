@@ -171,6 +171,7 @@ public class activity_examinations extends AppCompatActivity {
             examList.add(new Exam(
                     obj.getInt("amka"),
                     obj.getInt("id_d"),
+                    obj.getInt("id_e"),
                     obj.getString("type"),
                     obj.getString("name_exam"),
                     obj.getString("result"),
@@ -272,7 +273,7 @@ public class activity_examinations extends AppCompatActivity {
             btn = ((Button) findViewById(id_));
             btn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
-                    // Toast.makeText(view.getContext(), "Button clicked index = " + id_, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), "Button clicked index = " + examList.get(id_).getId_e(), Toast.LENGTH_SHORT).show();
 
                     // ViewPdf pdf = new ViewPdf();
                     // pdf.downloadPDF(examList.get(id_).getfile());
@@ -281,8 +282,8 @@ public class activity_examinations extends AppCompatActivity {
                     //   @Override
                     //public void run() {
                     Intent i = new Intent(getApplicationContext(), pdf_open.class);
-
-                    i.putExtra("key", examList.get(id_).getfile());
+                   String url= String.valueOf(examList.get(id_).getId_e());
+                    i.putExtra("key", url);
                     startActivity(i);
                 }
             });

@@ -28,13 +28,13 @@ $conn->set_charset('utf8');
 
  $amka_user = $_POST["amka_user"];
  //creating a query
- $stmt = $conn->prepare("SELECT amka, id_d, type, name_exam, result, date ,comments,file FROM examination WHERE amka='$amka_user'");
+ $stmt = $conn->prepare("SELECT amka, id_d,id_e, type, name_exam, result, date ,comments,file FROM examination WHERE amka='$amka_user'");
  
  //executing the query 
  $stmt->execute();
  
  //binding results to the query 
- $stmt->bind_result($amka, $id_d, $type, $name_exam, $result, $date ,$comments,$file);
+ $stmt->bind_result($amka, $id_d, $id_e, $type, $name_exam, $result, $date ,$comments,$file);
  
  $examines = array(); 
  
@@ -44,6 +44,7 @@ $conn->set_charset('utf8');
  $temp=[
 'amka'=>$amka,
 'id_d'=>$id_d, 
+'id_e'=>$id_e, 
 'type'=>$type, 
 'name_exam'=>$name_exam, 
 'result'=>$result,
