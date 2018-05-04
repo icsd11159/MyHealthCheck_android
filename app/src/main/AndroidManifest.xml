@@ -71,7 +71,8 @@
                 <data android:scheme="mmsto" />
             </intent-filter>
         </activity>
-        <activity android:name=".pdf_open"></activity>
+
+        <activity android:name=".first_aid"/>
     </application>
 
 </manifest>

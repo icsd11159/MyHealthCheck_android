@@ -64,7 +64,9 @@ public class activity_examinations extends AppCompatActivity {
     //    inflate2 = (TableLayout) findViewById(R.id.mytable);
         // pdf = (Button) findViewById(R.id.pdf);
       //  pdf.setVisibility(View.GONE);
-        getJSON("http://ba31f2d0.ngrok.io/mypraxis/MyHealthCheck/Api.php");
+        SessionManager s=new SessionManager(activity_examinations.this);
+
+        getJSON("http://192.168.1.2/mypraxis/MyHealthCheck/Api.php");
     }
 
 
@@ -170,14 +172,13 @@ public class activity_examinations extends AppCompatActivity {
             input1.add(String.valueOf(i));
             examList.add(new Exam(
                     obj.getInt("amka"),
-                    obj.getInt("id_d"),
-                    obj.getInt("id_e"),
-                    obj.getString("type"),
-                    obj.getString("name_exam"),
-                    obj.getString("result"),
-                    obj.getString("date"),
-                    obj.getString("comments"),
-                    obj.getString("file")
+                    obj.getInt("id_doctor"),
+                    obj.getInt("id_exam"),
+                    obj.getString("type_ex"),
+                    obj.getString("text"),
+                    obj.getString("date_e"),
+                    obj.getString("comments")
+                    //  obj.getString("name")
             ));
 
 
@@ -227,10 +228,9 @@ public class activity_examinations extends AppCompatActivity {
                 txtcola6.setText(t4);
                 txtcola7.setText(t5);
                 txtcola8.setText(t6);
-                txtcol3.setText(String.valueOf(examList.get(i).getId_d()));
+                txtcol3.setText(String.valueOf(examList.get(i).getid_doctor()));
                 txtcol4.setText(String.valueOf(examList.get(i).getName_exam()));
                 txtcol5.setText(examList.get(i).getType());
-                txtcol6.setText(examList.get(i).getResult());
                 txtcol7.setText(examList.get(i).getDate());
                 txtcol8.setText(examList.get(i).getComments());
                 // txtcol9.setText(examList.get(i).getComments());
@@ -283,7 +283,8 @@ public class activity_examinations extends AppCompatActivity {
                     //public void run() {
                     Intent i = new Intent(getApplicationContext(), pdf_open.class);
                    String url= String.valueOf(examList.get(id_).getId_e());
-                    i.putExtra("key", url);
+                    Toast.makeText(view.getContext(), "Button clicked index = " + session.ipaddress(), Toast.LENGTH_SHORT).show();
+                    i.putExtra("key", "http://192.168.1.2/mypraxis/MyHealthCheck/src/"+url+"/");
                     startActivity(i);
                 }
             });

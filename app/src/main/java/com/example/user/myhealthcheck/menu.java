@@ -33,6 +33,7 @@ public class menu extends AppCompatActivity {
         final Context context = this;
 
         ImageButton imgbtn = (ImageButton) findViewById(R.id.imageButton3);
+        ImageButton imgbtn6 = (ImageButton) findViewById(R.id.imageButton6);
         Button sosn = (Button) findViewById(R.id.sosn);
         TextView notcon = (TextView) findViewById(R.id.notcon);
 
@@ -112,6 +113,19 @@ public class menu extends AppCompatActivity {
                 Intent menu = new Intent(context, MainActivity.class);
                 startActivity(menu);
 
+            }
+
+        });
+      //  ImageButton imgbtn6 = (ImageButton) findViewById(R.id.imageButton6);
+        imgbtn6.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(getApplicationContext(), pdf_open.class);
+                //String url= String.valueOf(examList.get(id_).getId_e());
+                i.putExtra("key", session.ipaddress()+"/mypraxis/MyHealthCheck/app/build/generated/assets/049_Πρώτες Βοήθειες.pdf");
+                startActivity(i);
             }
 
         });

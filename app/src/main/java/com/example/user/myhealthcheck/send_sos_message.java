@@ -56,7 +56,7 @@ public class send_sos_message extends FragmentActivity implements OnMapReadyCall
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
-    SessionManager session;
+    SessionManager session=new SessionManager(send_sos_message.this);
     private GoogleMap mMap;
     double latitude;
     double longitude;
@@ -277,7 +277,8 @@ public class send_sos_message extends FragmentActivity implements OnMapReadyCall
         Toast.makeText(send_sos_message.this,"Your Current Location", Toast.LENGTH_LONG).show();
 
         Log.d("onLocationChanged", String.format("latitude:%.3f longitude:%.3f",latitude,longitude));
-        getJSON(" http://ba31f2d0.ngrok.io/mypraxis/MyHealthCheck/getsosnumber.php");
+
+        getJSON(session.ipaddress()+"/mypraxis/MyHealthCheck/getsosnumber.php");
         //stop location updates
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);

@@ -31,7 +31,7 @@ public class ViewPdf extends Activity {
 
 
 public void viewpdf (String namepdf){
-    String download_file_url = "http://ba31f2d0.ngrok.io/mypraxis/MyHealthCheck/src/uploads/" + namepdf;
+    String download_file_url = "http://192.168.1.2//mypraxis/MyHealthCheck/src/uploads/" + namepdf;
     downloadAndOpenPDF(download_file_url);
 }
     void downloadAndOpenPDF(final String download_file_url) {

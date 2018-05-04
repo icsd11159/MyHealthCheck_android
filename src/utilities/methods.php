@@ -187,49 +187,45 @@ function update_thesis_application_state($link, $state, $thesis_id, $student_id)
     }
 }
 
-function add_exams($link,  $id_d, $amka, $type, $name_exam, $result, $date , $comments)
+function add_exams($link ,$id_exam,  $id_doctor, $amka, $type, $text, $date , $comments)
 {
+	
     mysqli_autocommit($link, false);
 	
-	$id_c=0;
+	
 
-    $query = "insert into examination 
-                            (
-                                amka,
-                                id_c,
-								id_d,
-                                type,
-                                name_exam,
-                                result,
-                                date,
-                                comments
-							
+    $query = "insert into examines 
+                            (  
+								id_exam,
+								id_doctor,
+                                type_ex,
+								amka,
+                                text,
+								comments,
+                                date_e
                             ) 
                             Values
-                            (
-                                '$amka',
-                                '$id_c',
-								'$id_d',
+                            ( 
+								'$id_exam',
+								'$id_doctor',
                                 '$type',
-                                '$name_exam',
-                                '$result',
-                                '$date',
-                                '$comments'
-							
-                            )";
+								'$amka',
+                                '$text',
+								'$comments',
+                                '$date'
+                              )";
 						
 
             
-    $result = mysqli_query($link, $query) ;
+    $result = mysqli_query($link, $query);
 	
-   
-   
+ 
    
             
     if ($result) {
-	  
+	       mysqli_commit($link);
 		  showAlertDialogMethod("Εισαγωγή εξέτασης επιτυχής");
-	
+	      return true;
 	
  
 		
@@ -323,7 +319,27 @@ function get_thesis($link, $title, $user_id, $student_number, $target, $descript
     }
     return null;
 }
+function get_exam_for_edit($link,$id_exam,$text){
+	$queryw="SELECT * FROM examines WHERE id_exam='$id_exam' AND text='$text' ";
+ 
+   $result=mysqli_query($link, $queryw) or die(mysqli_error($link));
+	return $result;
+}
 
+function delete_exam($link,$id_exam,$text){
+	$queryw="DELETE FROM examines WHERE id_exam='$id_exam' AND text='$text' ";
+ $result = mysqli_query($link, $queryw);
+    if ($result) {
+        mysqli_commit($link);
+        showAlertDialogMethod("Delete the exam");
+        return true;
+    } else {
+        mysqli_rollback($link);
+        showAlertDialogMethod("Can not delet the exam");
+        return false;
+    }
+	
+}
 function get_thesis_by_state($link, $state, $user_id)
 {
     $sql = "SELECT * FROM thesis WHERE state='$state' AND thesis.teacher_id = '$user_id'";
@@ -364,7 +380,7 @@ function get_thesis_student_applied_for($link, $student_id)
 function get_exam_by_client($link,  $id_d)
 {
 
-    $sql = "SELECT DISTINCT examination.* FROM examination WHERE examination.id_d = $id_d";
+    $sql = "SELECT DISTINCT examines.* FROM examines WHERE examines.id_doctor = $id_d";
     $result = mysqli_query($link, $sql) or die(mysqli_error($link));
     $count = mysqli_num_rows($result);
     if ($count >= 1) {
@@ -450,12 +466,12 @@ function get_examines_with_keywords($link, $keyword_phrase , $id_d)
         return null;
     }
 
-    $sql = "SELECT DISTINCT examination.* FROM examination WHERE examination.id_d='$id_d' AND ";
+    $sql = "SELECT DISTINCT examines.* FROM examination WHERE examines.id_doctor='$id_d' AND ";
 
     $counter = 0;
 
     foreach ($final_keywords as $final_keyword) {
-        $sql = $sql . "examination.type LIKE '%$final_keyword%' OR examination.name_exam LIKE '%$final_keyword%' OR examination.date LIKE '%$final_keyword%' OR examination.result LIKE '%$final_keyword%' OR examination.name_exam LIKE '%$final_keyword%' OR examination.amka LIKE '%$final_keyword%' OR examination.name_exam LIKE '%$final_keyword%' OR examination.date LIKE '%$final_keyword%'OR examination.name_exam LIKE '%$final_keyword%'  ";
+        $sql = $sql . "examines.type LIKE '%$final_keyword%' OR examines.text LIKE '%$final_keyword%' OR examines.date_e LIKE '%$final_keyword%'  OR examines.amka LIKE '%$final_keyword%' OR examination.date_e LIKE '%$final_keyword%'  ";
         if ($counter < count($final_keywords) - 1) {
             $sql = $sql . " OR ";
         }

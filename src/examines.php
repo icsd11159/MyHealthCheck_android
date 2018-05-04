@@ -64,15 +64,148 @@ include_once "page_parts/login_checker.php";
 
 echo '</form>';
 		 }
+		 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['edit_value'])) {
+  $id=$_POST['id'];
+  $id_e=$_POST['id_e'];
+ $id_d= $_SESSION['user_id'];
+  $value=$_POST['value'];
+   $edit_text=$_POST['edit_text'];
+	mysqli_autocommit($link, false);													 
+    $sql = "UPDATE examines
+            SET $value='$edit_text'
+            WHERE id_exam='$id_e' AND id='$id'";
+		 $result = mysqli_query($link, $sql);
+    if ($result) {
+        mysqli_commit($link);
+         showAlertDialogMethod("Επιτυχής Επεξεργασία");
+        return true;
+    } else {
+        mysqli_rollback($link);
+         showAlertDialogMethod("Ανεπιτυχής Επεξεργασία");
+        return false;
+    }
+}
+		 	if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['delete'])) {
+  $id_d= $_SESSION['user_id'];
+  $id_e=$_POST['id_e'];
+  $text=$_POST['text'];
+    
+     $result =delete_exam($link,$id_e,$text);
+			}
+					 	if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['edit_e'])) {
+							  $id_d= $_SESSION['user_id'];
+							   $id= $_POST['id'];
+  $id_e=$_POST['id_e'];
+  $text=$_POST['text'];
+  	$value=$_POST['edit_the'];
+  echo "Επεξεργασία για το πεδίο :".$value;
+  
+ echo'<form action="" method="post">';
+ echo'<input type="text" name="edit_text">';
+ echo'<input type="submit" name="edit_value">';
+ echo'<input type="hidden" id="id_e" name="id_e" value="'.$id_e.'">';
+ echo'<input type="hidden" id="id" name="id" value="'.$id.'">';
+ echo'<input type="hidden" id="value" name="value" value="'.$value.'">';
+ echo'</form>';
+	
+	
+
+    
+     //$result =delete_exam($link,$id_e,$text);
+			}
+		if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['edit'])) {
+  $id_d= $_SESSION['user_id'];
+  $id_e=$_POST['id_e'];
+  $text=$_POST['text'];
+  
+     $result =get_exam_for_edit($link,$id_e,$text);
+  echo ' <tr>';
+                echo '<td><h4>AMKA</h4></td>';
+				echo '<td><h4>Τύπος Εξέτασης</h4></td>';
+				echo '<td><h4>Αποτέλεσμα</h4></td>';
+				echo '<td><h4>Ημερομηνία</h4></td>';
+				echo '<td><h4>Σχόλια</h4></td>';
+                echo '</tr>';
+       
+				
+            
+                    
+                          while ($row = $result ->fetch_assoc()) { 
+						   $id=$row['id'];
+	 
+						          echo '<tr>';
+    
+                    echo '<td>';
+                    echo '<h5 id="align_start" style="">' . $row['amka'] . '</h5>';
+                    echo '</td>';
+                    echo '<td>';
+                    echo '<h5 id="align_start" style="">' . $row['type_ex'] . '</h5>';
+						 echo '	<form method="post" action="">';
+        echo ' <input type="submit" name="edit_e" value="Επεξεργασία"/>';
+		  echo '<input type="hidden" id="edit_the" name="edit_the" value="type_ex">';
+		   echo '<input type="hidden" id="id_e" name="id_e" value="'.$id.'">';
+  echo '<input type="hidden" id="id" name="id" value="'.$id_e.'">';
+	 echo '<input type="hidden" id="text" name="text" value="'.$text.'">';
+     echo '  </form>';
+                    echo '</td>';
+                    echo '<td>';
+                    echo '<h5 id="align_start" style="">' . $row['text'] . '</h5>';
+						 echo '	<form method="post" action="">';
+        echo ' <input type="submit" name="edit_e" value="Επεξεργασία"/>';
+		  echo '<input type="hidden" id="edit_the" name="edit_the" value="text">';
+  echo '<input type="hidden" id="id_e" name="id_e" value="'.$id_e.'">';
+    echo '<input type="hidden" id="id" name="id" value="'.$id.'">';
+	 echo '<input type="hidden" id="text" name="text" value="'.$text.'">';
+     echo '  </form>';
+                    echo '</td>';
+                    echo '<td>';
+                    echo '<h5 id="align_start" style="">' . $row['date_e'] . '</h5>';
+						echo '	<form method="post" action="">';
+        echo ' <input type="submit" name="edit_e" value="Επεξεργασία"/>';
+		 echo '<input type="hidden" id="id" name="id" value="'.$id.'">';
+		  echo '<input type="hidden" id="edit_the" name="edit_the" value="date">';
+  echo '<input type="hidden" id="id_e" name="id_e" value="'.$id_e.'">';
+	 echo '<input type="hidden" id="text" name="text" value="'.$text.'">';
+     echo '  </form>';
+                    echo '</td>';
+                    echo '<td>';
+                    echo '<h5 id="align_start" style="">' . $row['comments'] . '</h5>';
+	 echo '	<form method="post" action="">';
+        echo ' <input type="submit" name="edit_e" value="Επεξεργασία"/>';
+		  echo '<input type="hidden" id="edit_the" name="edit_the" value="comments">';
+  echo '<input type="hidden" id="id_e" name="id_e" value="'.$id_e.'">';
+   echo '<input type="hidden" id="id" name="id" value="'.$id.'">';
+	 echo '<input type="hidden" id="text" name="text" value="'.$text.'">';
+     echo '  </form>';
+                    echo '</td>';
+                    
+                    echo '<td>';
+                 
+                    echo '</td>';
+					 echo '<td>';
+					
+		 echo '	<form method="post" action="">';
+        echo ' <input type="submit" name="delete" value="Διαγραφή"/>';
+  echo '<input type="hidden" id="id_e" name="id_e" value="'.$id_e.'">';
+	 echo '<input type="hidden" id="text" name="text" value="'.$text.'">';
+     echo '  </form>';
+	
+	echo'</td>';
+              echo' </tr>';
 		
+					}
+                
+ 
+ 
+ }
 		
       
 		  if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['view_all'])) {
           	 $id_d= $_SESSION['user_id'];
-			
+			$id_e=0;//default
 			$all_examines= get_exam_by_client($link,  $id_d);
-            
-
+			// mysqli_autocommit($link, false);
+          
             if ($all_examines == null) {
 
                 echo '<h5>Δεν βρέθηκαν αποτελέσματα </h5>';
@@ -82,7 +215,6 @@ echo '</form>';
                 echo ' <tr>';
                 echo '<td><h4>AMKA</h4></td>';
 				echo '<td><h4>Τύπος Εξέτασης</h4></td>';
-				echo '<td><h4>Όνομα Εξέτασης</h4></td>';
 				echo '<td><h4>Αποτέλεσμα</h4></td>';
 				echo '<td><h4>Ημερομηνία</h4></td>';
 				echo '<td><h4>Σχόλια</h4></td>';
@@ -92,26 +224,27 @@ echo '</form>';
             
                     
                           while ($row = $all_examines->fetch_assoc()) { 
-					
+						  
+	 
 						          echo '<tr>';
     
                     echo '<td>';
                     echo '<h5 id="align_start" style="">' . $row['amka'] . '</h5>';
                     echo '</td>';
                     echo '<td>';
-                    echo '<h5 id="align_start" style="">' . $row['type'] . '</h5>';
+                    echo '<h5 id="align_start" style="">' . $row['type_ex'] . '</h5>';
                     echo '</td>';
                     echo '<td>';
-                    echo '<h5 id="align_start" style="">' . $row['name_exam'] . '</h5>';
+                    echo '<h5 id="align_start" style="">' . $row['text'] . '</h5>';
+					
                     echo '</td>';
                     echo '<td>';
-                    echo '<h5 id="align_start" style="">' . $row['result'] . '</h5>';
-                    echo '</td>';
-                    echo '<td>';
-                    echo '<h5 id="align_start" style="">' . $row['date'] . '</h5>';
+                    echo '<h5 id="align_start" style="">' . $row['date_e'] . '</h5>';
+
                     echo '</td>';
                     echo '<td>';
                     echo '<h5 id="align_start" style="">' . $row['comments'] . '</h5>';
+	
                     echo '</td>';
                     
                     echo '<td>';
@@ -122,28 +255,32 @@ echo '</form>';
                    
 					
 		 echo '</form>';
-                  //  echo '<button type="submit" name="examine" class="btn btn-primary">Εξετάσεις Ασθενούς</button>';
+                
 				
                     echo '</form>';
                     echo '</td>';
 					 echo '<td>';
-					 $id_e=$row['id_e'];
-					  echo "id εξετασης: ",$id_e;
-					   $_SESSION['id_e'] = $id_e;
-
-					// echo '<button type="submit" action="upload_pdf.php" name="upload" method="post"  class="btn btn-primary">Ανεβάστε PDF εξέτασης</button>';
-						echo '<form action="upload_pdf.php"  method="post" enctype="multipart/form-data">';
-                   echo '<input type="hidden" id="id_e" name="id_e" >';
-                  
-					//	 echo " Ανεβάστε το pdf της εξέτασης:";
-              
-   echo '<input type="hidden" id="id_e" name="id_e"  value='.$id_e.' >';
-				//	echo'<button type="submit"  name="upload">upload</button>';
-		
-		?>
+					
+				
+					
+		$text=$row['text'];
+		if($id_e!=$row['id_exam']){
+							  $id_e=$row['id_exam'];
+					 ?>
 		<a href="upload_pdf.php?id_e=<?php echo $id_e ?>">Ανεβάστε το pdf της εξέτασης:</a>
 		<?php
 		echo'</form>';
+		 echo "ID Examination: ".$id_e;		
+				}
+				
+			 echo '	<form method="post" action="">';
+        echo ' <input type="submit" name="edit" value="Επεξεργασία/Διαγραφή"/>';
+  echo '<input type="hidden" id="id_e" name="id_e" value="'.$id_e.'">';
+	 echo '<input type="hidden" id="text" name="text" value="'.$text.'">';
+     echo '  </form>';
+					
+				
+		
 	echo'</td>';
               echo' </tr>';
 		
@@ -169,7 +306,6 @@ echo '</form>';
                 echo ' <tr>';
                 echo '<td><h4>AMKA</h4></td>';
 				echo '<td><h4>Τύπος Εξέτασης</h4></td>';
-				echo '<td><h4>Όνομα Εξέτασης</h4></td>';
 				echo '<td><h4>Αποτέλεσμα</h4></td>';
 				echo '<td><h4>Ημερομηνία</h4></td>';
 				echo '<td><h4>Σχόλια</h4></td>';
@@ -179,49 +315,48 @@ echo '</form>';
             
                     
                           while ($row = $all_examines->fetch_assoc()) { 
-					
+				 
 						          echo '<tr>';
     
                     echo '<td>';
                     echo '<h5 id="align_start" style="">' . $row['amka'] . '</h5>';
                     echo '</td>';
                     echo '<td>';
-                    echo '<h5 id="align_start" style="">' . $row['type'] . '</h5>';
+                    echo '<h5 id="align_start" style="">' . $row['type_ex'] . '</h5>';
                     echo '</td>';
                     echo '<td>';
-                    echo '<h5 id="align_start" style="">' . $row['name_exam'] . '</h5>';
+                    echo '<h5 id="align_start" style="">' . $row['text'] . '</h5>';
                     echo '</td>';
                     echo '<td>';
-                    echo '<h5 id="align_start" style="">' . $row['result'] . '</h5>';
-                    echo '</td>';
-                    echo '<td>';
-                    echo '<h5 id="align_start" style="">' . $row['date'] . '</h5>';
+                    echo '<h5 id="align_start" style="">' . $row['date_e'] . '</h5>';
                     echo '</td>';
                     echo '<td>';
                     echo '<h5 id="align_start" style="">' . $row['comments'] . '</h5>';
                     echo '</td>';
                     
                     echo '<td>';
-                    echo '<form action="examines.php" method="post" enctype="multipart/form-data">';
-
-                  //  echo '<button type="submit" name="examine" class="btn btn-primary">Εξετάσεις Ασθενούς</button>';
-					echo '<button type="submit" value="' . $row['amka'] . '" name="new_examine" class="btn btn-primary">Νέα Εξέταση</button>';
-                    echo '</form>';
+               
                     echo '</td>';
 					 echo '<td>';
-					 $id_e=$row['id_e'];
+				
 					 echo "id εξετασης: ",$id_e;
 					   $_SESSION['id_e'] = $id_e;
-					// echo '<button type="submit" action="upload_pdf.php" name="upload" method="post"  class="btn btn-primary">Ανεβάστε PDF εξέτασης</button>';
-						echo '<form action="upload_pdf.php"  method="post" enctype="multipart/form-data">';
-                   echo '<input type="hidden" id="id_e" name="id_e" >';
+					
+						
                   
-					  
-						// echo " ";
-                   ?>
-				   	<a href="upload_pdf.php?id_e=<?php echo $id_e ?>">Ανεβάστε το pdf της εξέτασης:</a>
-					<?php
-		echo '</form>';
+					if($id_e!=$row['id_exam']){
+							  $id_e=$row['id_exam'];
+
+					 ?>
+		<a href="upload_pdf.php?id_e=<?php echo $id_e ?>">Ανεβάστε το pdf της εξέτασης:</a>
+		<?php
+       echo "ID Examination: ".$id_e;
+						 }
+		 echo '	<form method="post" action="">';
+        echo ' <input type="submit" name="edit" value="Επεξεργασία/Διαγραφή"/>';
+  echo '<input type="hidden" id="id_e" name="id_e" value="'.$id_e.'">';
+	 echo '<input type="hidden" id="text" name="text" value="'.$text.'">';
+     echo '  </form>';
 		 echo '</td>';
                     echo '</tr>';
 					}

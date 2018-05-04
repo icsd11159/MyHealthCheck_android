@@ -43,10 +43,11 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
    // SessionManager session=new SessionManager( Signin.this);
     @Override
     protected String doInBackground(String... params) {
+        SessionManager n=new SessionManager(context);
 
         String type = params[0];
-        String login_url = " http://ba31f2d0.ngrok.io/mypraxis/MyHealthCheck/login.php";
-        String register_url = " http://ba31f2d0.ngrok.io/mypraxis/MyHealthCheck/register.php";
+        String login_url = "http://192.168.1.2/mypraxis/MyHealthCheck/login.php";
+        String register_url = "http://192.168.1.2/mypraxis/MyHealthCheck/register.php";
 
         if(type.equals("login")) {
 
@@ -186,7 +187,7 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
         return success;
     }
 
-    public static interface DataDownloadListener {
+    public  interface DataDownloadListener {
         void dataDownloadedSuccessfully(Object data);
         void dataDownloadFailed();
     }

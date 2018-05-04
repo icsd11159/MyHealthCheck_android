@@ -1,6 +1,7 @@
 package com.example.user.myhealthcheck;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,11 @@ import android.webkit.WebViewClient;
 
 public class pdf_open extends AppCompatActivity {
     private String value;
+    Context context;
+   pdf_open (Context ctx) {
+        context = ctx;
+    }
+    SessionManager session=new SessionManager(context);
     public String getValue(){
        // @SuppressLint("JavascriptInterface")
         return this.value;
@@ -45,7 +51,7 @@ public class pdf_open extends AppCompatActivity {
             setV(value);
        //     myWebView.addJavascriptInterface(new JsObject(), "injectedObject");
 
-            myWebView.loadUrl("http://ba31f2d0.ngrok.io/mypraxis/MyHealthCheck/src/"+value+"/");
+            myWebView.loadUrl(value);
         }
         myWebView.setWebViewClient(new MyWebViewClient());
 
@@ -57,7 +63,7 @@ public class pdf_open extends AppCompatActivity {
         @SuppressLint("JavascriptInterface")
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
 
-            if (Uri.parse(url).getHost().equals("http://ba31f2d0.ngrok.io/mypraxis/MyHealthCheck/src/uploads/"+getValue()+"/")) {
+            if (Uri.parse(url).getHost().equals(getValue())) {
                 // This is my web site, so do not override; let my WebView load the page
                 return false;
             }

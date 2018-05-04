@@ -8,33 +8,31 @@ import java.sql.Date;
 
 public class Exam {
     private int amka;
-    private int id_d;
-    private String type;
-    private String name_exam;
-    private String result;
-   private String date;
+    private int id_doctor;
+    private String type_ex;
+    private String text;
+    private String date_e;
     private String comments;
-    private String file;
+  //  private String name;
     private int id_e;
 
-    public Exam(int amka, int id_d,int id_e, String type, String name_exam, String result ,String date, String comments,String file) {
+    public Exam(int amka, int id_doctor,int id_e, String type_ex, String text ,String date_e, String comments) {//,String name
         this.amka = amka;
-        this.id_d = id_d;
+        this.id_doctor = id_doctor;
         this.id_e = id_e;
-        this.type = type;
-        this.name_exam = name_exam;
-        this.result = result;
-        this.date = date;
+        this.type_ex = type_ex;
+        this.text = text;
+        this.date_e = date_e;
         this.comments = comments;
-        this.file = file;
+      //  this.name = name;
     }
 
     public int getAmka() {
         return amka;
     }
 
-    public int getId_d() {
-        return  id_d;
+    public int getid_doctor() {
+        return  id_doctor;
     }
 
     public int getId_e() {
@@ -42,24 +40,22 @@ public class Exam {
     }
 
     public String getType() {
-        return type;
+        return type_ex;
     }
 
     public String getName_exam() {
-        return name_exam;
+        return text;
     }
 
-    public String getResult() {
-        return result;
-    }
+
 
     public String getDate() {
-       return date;
+        return date_e;
     }
     public String getComments() {
         return comments;
     }
-    public String getfile() {
-        return file;
-    }
+   // public String getname() {
+      //  return name;
+   // }
 }

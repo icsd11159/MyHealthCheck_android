@@ -34,6 +34,7 @@ public class SessionManager {
     // User name (make variable public to access from outside)
     public static final String KEY_NAME = "name";
 
+    public static final String ip = "192.168.1.2";
     // Email address (make variable public to access from outside)
    // public static final String KEY_EMAIL = "email";
 
@@ -61,6 +62,9 @@ public class SessionManager {
         editor.commit();
     }
 
+public String ipaddress(){
+    return ip;
+}
     /**
      * Check login method wil check user login status
      * If false it will redirect user to login page

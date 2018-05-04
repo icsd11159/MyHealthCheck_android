@@ -109,8 +109,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         int result = googleAPI.isGooglePlayServicesAvailable(this);
         if(result != ConnectionResult.SUCCESS) {
             if(googleAPI.isUserResolvableError(result)) {
-                googleAPI.getErrorDialog(this, result,
-                        0).show();
+                googleAPI.getErrorDialog(this, result, 0).show();
             }
             return false;
         }
@@ -148,12 +147,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         Button btnRestaurant = (Button) findViewById(R.id.btnPharmacy);
         btnRestaurant.setOnClickListener(new View.OnClickListener() {
-            String Restaurant = "restaurant";
+            String Pharmacy = "pharmacy";
             @Override
             public void onClick(View v) {
                 Log.d("onClick", "Button is Clicked");
                 mMap.clear();
-                String url = getUrl(latitude, longitude, Restaurant);
+                String url = getUrl(latitude, longitude, Pharmacy);
                 Object[] DataTransfer = new Object[2];
                 DataTransfer[0] = mMap;
                 DataTransfer[1] = url;

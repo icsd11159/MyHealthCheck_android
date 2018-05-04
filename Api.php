@@ -28,34 +28,44 @@ $conn->set_charset('utf8');
 
  $amka_user = $_POST["amka_user"];
  //creating a query
- $stmt = $conn->prepare("SELECT amka, id_d,id_e, type, name_exam, result, date ,comments,file FROM examination WHERE amka='$amka_user'");
- 
+ $stmt = $conn->prepare("SELECT amka, id_doctor, id_exam, type_ex, text, date_e ,comments FROM examines WHERE amka='$amka_user'");
+ //$stmta = $conn->prepare("SELECT name FROM upload_pdf WHERE amka='$amka_user'");
  //executing the query 
  $stmt->execute();
  
  //binding results to the query 
- $stmt->bind_result($amka, $id_d, $id_e, $type, $name_exam, $result, $date ,$comments,$file);
+ $stmt->bind_result($amka, $id_doctor, $id_exam, $type_ex, $text, $date_e ,$comments);
+ // $stmta->execute();
  
+ //binding results to the query 
+ //$stmta->bind_result($name);
  $examines = array(); 
- 
+ // $files = array();
  //traversing through all the result 
  while($stmt->fetch()){
 	//  $temp = array(); 
  $temp=[
 'amka'=>$amka,
-'id_d'=>$id_d, 
-'id_e'=>$id_e, 
-'type'=>$type, 
-'name_exam'=>$name_exam, 
-'result'=>$result,
-'date' =>$date, 
+'id_doctor'=>$id_doctor, 
+'id_exam'=>$id_exam, 
+'type_ex'=>$type_ex, 
+'text'=>$text, 
+'date_e' =>$date_e, 
 'comments'=>$comments,
-'file'=>$file
 ];
  array_push($examines, $temp);
- }
  
+ }
+  //while($stmta->fetch()){
+	//  $temp = array(); 
+ //$tempa=[
+//'name'=>$name,
+//];
+ //array_push($examines, $temp);
+ //array_push($files, $tempa);
+
  //displaying the result in json format 
  echo json_encode($examines);
+ // echo json_encode($files);
  
-
+  

@@ -6,3 +6,13 @@
 .DS_Store
 /build
 /captures
+/ProjectDM/build/
+/ProjectDM/nbproject/private/
+/ProjectDM/ConverterPrj/build/
+/ProjectDM/ConverterPrj/dist/
+/ProjectDM/ConverterPrj/nbproject/private/
+/ProjectDM/myhealthcall/ConverterPrj/build/
+/ProjectDM/myhealthcall/ConverterPrj/dist/
+/ProjectDM/myhealthcall/ConverterPrj/nbproject/private/
+/ProjectDM/myhealthcall/build/
+/ProjectDM/dist/
