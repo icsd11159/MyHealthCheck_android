@@ -34,7 +34,7 @@ public class SessionManager {
     // User name (make variable public to access from outside)
     public static final String KEY_NAME = "name";
 
-    public static final String ip = "192.168.1.2";
+    public static final String ip = "http://192.168.1.2";
     // Email address (make variable public to access from outside)
    // public static final String KEY_EMAIL = "email";
 

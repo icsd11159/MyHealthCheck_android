@@ -16,6 +16,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TableLayout;
@@ -43,30 +44,36 @@ import java.util.List;
 public class activity_examinations extends AppCompatActivity {
     SessionManager session;
     // TextView listView_amka,listView_idd,listView_type,listView_nameexam,listView_result,listView_date,listView_comments;
-    ArrayList<Exam> examList=new ArrayList <Exam>();
+    ArrayList<Exam> examList = new ArrayList<Exam>();
+    ArrayList<pdfname> pdfList = new ArrayList<pdfname>();
+    // private int j = 0;
+    private Boolean isnew = true;
     private ArrayList<String> input1 = new ArrayList<String>();
-    private TableRow row,row1,row2,row3,row4,row5,row6,row7;
+    private ArrayList<String> input2 = new ArrayList<String>();
+    private TableRow row, row1, row2, row3, row4, row5, row6, row7;
     private TableLayout inflate;
-    private TextView txtcol1, txtcol3,txtcol4,txtcol5,txtcol6,txtcol7,txtcol8,textd,txtcola3,txtcola4,txtcola5,txtcola6,txtcola7,txtcola8;
-    private String t1="Id Dr:"+"      ";
-    private String t2="Εξέταση:"+"    ";
-    private String t3="Είδος:"+"      ";
-    private String t4="Αποτέλεσμα:"+" ";
-    private String t5="Ημερομηνία:"+" ";
-    private String t6="Σχόλια:"+"     ";
-  //  Button[] myButton ;
-  //  Button pdf;
+    private TextView txtcol1, txtcol3, txtcol4, txtcol5, txtcol6, txtcol7, txtcol8, textd, txtcola3, txtcola4, txtcola5, txtcola6, txtcola7, txtcola8;
+    private String t1 = "Id Dr:" + "      ";
+    private String t2 = "Εξέταση:" + "    ";
+    private String t3 = "Είδος:" + "      ";
+    private String t4 = "Αποτέλεσμα:" + " ";
+    private String t5 = "Ημερομηνία:" + " ";
+    private String t6 = "Σχόλια:" + "     ";
+
+    //  Button[] myButton ;
+    //  Button pdf;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_examinations);
         inflate = (TableLayout) findViewById(R.id.mytable);
-    //    inflate2 = (TableLayout) findViewById(R.id.mytable);
+        //    inflate2 = (TableLayout) findViewById(R.id.mytable);
         // pdf = (Button) findViewById(R.id.pdf);
-      //  pdf.setVisibility(View.GONE);
-        SessionManager s=new SessionManager(activity_examinations.this);
+        //  pdf.setVisibility(View.GONE);
+        SessionManager s = new SessionManager(activity_examinations.this);
 
         getJSON("http://192.168.1.2/mypraxis/MyHealthCheck/Api.php");
+        //  String pdfname_url ="http://192.168.1.2/mypraxis/MyHealthCheck/pdfname.php";
     }
 
 
@@ -96,7 +103,7 @@ public class activity_examinations extends AppCompatActivity {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
                 try {
                     loadIntoListView(s);
                 } catch (JSONException e) {
@@ -107,7 +114,6 @@ public class activity_examinations extends AppCompatActivity {
             //in this method we are fetching the json string
             @Override
             protected String doInBackground(Void... voids) {
-
 
 
                 try {
@@ -126,21 +132,21 @@ public class activity_examinations extends AppCompatActivity {
                     String amka_user = user.get(SessionManager.KEY_NAME);
                     con.setRequestMethod("POST");
                     con.setDoOutput(true);
-                   // con.setDoInput(true);
+                    // con.setDoInput(true);
                     OutputStream outputStream = con.getOutputStream();
                     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                    String post_data = URLEncoder.encode("amka_user","UTF-8")+"="+URLEncoder.encode(amka_user,"UTF-8");
+                    String post_data = URLEncoder.encode("amka_user", "UTF-8") + "=" + URLEncoder.encode(amka_user, "UTF-8");
                     bufferedWriter.write(post_data);
                     bufferedWriter.flush();
                     bufferedWriter.close();
                     outputStream.close();
 
                     //We will use a buffered reader to read the string from service
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream(),"iso-8859-1"));
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream(), "iso-8859-1"));
 
                     //A simple string to read values from each line
                     String json;
-
+                    // String jsonpdf;
                     //reading until we don't find null
                     while ((json = bufferedReader.readLine()) != null) {
 
@@ -155,16 +161,21 @@ public class activity_examinations extends AppCompatActivity {
                     return null;
                 }
 
+
             }
         }
         //creating asynctask object and executing it
         GetJSON getJSON = new GetJSON();
         getJSON.execute();
+      //  GetJSON getJSONpdf = new GetJSON();
+        //getJSONpdf.execute();
     }
 
     private void loadIntoListView(String json) throws JSONException {
         JSONArray jsonArray = new JSONArray(json);
-       // String[] product = new String[jsonArray.length()];
+       // JSONArray jsonArraypdf = new JSONArray(json);
+        // String[] product = new String[jsonArray.length()];
+
         for (int i = 0; i < jsonArray.length(); i++) {
 
             JSONObject obj = jsonArray.getJSONObject(i);
@@ -178,7 +189,7 @@ public class activity_examinations extends AppCompatActivity {
                     obj.getString("text"),
                     obj.getString("date_e"),
                     obj.getString("comments")
-                    //  obj.getString("name")
+
             ));
 
 
@@ -262,10 +273,12 @@ public class activity_examinations extends AppCompatActivity {
             this.row6.addView(txtcola8);
             this.row6.addView(txtcol8);
             inflate.addView(row6);
+
+            // String[] product = new String[jsonArray.length()];
             Button btn = new Button(this);
             btn.setId(i);
             final int id_ = btn.getId();
-            btn.setText("PDF for Exam: " + id_);
+            btn.setText("PDF for Exam: " + examList.get(id_).getId_e());
             btn.setBackgroundColor(Color.rgb(70, 80, 90));
             //linear.addView(btn, params);
             this.row7.addView(btn);
@@ -273,7 +286,7 @@ public class activity_examinations extends AppCompatActivity {
             btn = ((Button) findViewById(id_));
             btn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
-                    Toast.makeText(view.getContext(), "Button clicked index = " + examList.get(id_).getId_e(), Toast.LENGTH_SHORT).show();
+
 
                     // ViewPdf pdf = new ViewPdf();
                     // pdf.downloadPDF(examList.get(id_).getfile());
@@ -281,13 +294,31 @@ public class activity_examinations extends AppCompatActivity {
                     //  Thread thread = new Thread() {
                     //   @Override
                     //public void run() {
-                    Intent i = new Intent(getApplicationContext(), pdf_open.class);
-                   String url= String.valueOf(examList.get(id_).getId_e());
-                    Toast.makeText(view.getContext(), "Button clicked index = " + session.ipaddress(), Toast.LENGTH_SHORT).show();
-                    i.putExtra("key", "http://192.168.1.2/mypraxis/MyHealthCheck/src/"+url+"/");
+                    Intent i = new Intent(getApplicationContext(), readapdf.class);
+                //    AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.autocomplete);
+                  //  String getrec=textView.getText().toString();
+
+//Create the bundle
+                    Bundle bundle = new Bundle();
+
+//Add your data to bundle
+                    bundle.putInt("value",examList.get(id_).getId_e() );
+
+//Add the bundle to the intent
+                    i.putExtras(bundle);
+
+//Fire that second activity
                     startActivity(i);
+                  //  Intent v = new Intent(getApplicationContext(), readpdf.class);
+                   // Integer url = examList.get(id_).getId_e();
+
+
+                   // v.putExtra("no",  url );
+                   // startActivity(v);
                 }
             });
-        }}}
 
+        }
+    }
 
+}

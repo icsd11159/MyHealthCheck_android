@@ -14,10 +14,10 @@ import android.webkit.WebViewClient;
 public class pdf_open extends AppCompatActivity {
     private String value;
     Context context;
-   pdf_open (Context ctx) {
-        context = ctx;
-    }
-    SessionManager session=new SessionManager(context);
+  // pdf_open (Context ctx) {
+     //   context = ctx;
+   // }
+   // SessionManager session=new SessionManager(pdf_open.this);
     public String getValue(){
        // @SuppressLint("JavascriptInterface")
         return this.value;

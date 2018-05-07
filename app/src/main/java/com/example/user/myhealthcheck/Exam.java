@@ -13,18 +13,17 @@ public class Exam {
     private String text;
     private String date_e;
     private String comments;
-  //  private String name;
-    private int id_e;
+    private int id_exam;
 
-    public Exam(int amka, int id_doctor,int id_e, String type_ex, String text ,String date_e, String comments) {//,String name
+    public Exam(int amka, int id_doctor,int id_exam, String type_ex, String text ,String date_e, String comments) {//
         this.amka = amka;
         this.id_doctor = id_doctor;
-        this.id_e = id_e;
+        this.id_exam = id_exam;
         this.type_ex = type_ex;
         this.text = text;
         this.date_e = date_e;
         this.comments = comments;
-      //  this.name = name;
+
     }
 
     public int getAmka() {
@@ -36,7 +35,7 @@ public class Exam {
     }
 
     public int getId_e() {
-        return  id_e;
+        return  id_exam;
     }
 
     public String getType() {
@@ -55,7 +54,5 @@ public class Exam {
     public String getComments() {
         return comments;
     }
-   // public String getname() {
-      //  return name;
-   // }
+
 }
