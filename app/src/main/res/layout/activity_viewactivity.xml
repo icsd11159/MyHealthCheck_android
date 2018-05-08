@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.user.myhealthcheck.activity_examinations">
-
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -26,4 +25,7 @@
 
 
     </ScrollView>
+
+
+
 </android.support.constraint.ConstraintLayout>

@@ -74,6 +74,7 @@
         <activity android:name=".first_aid" />
         <activity android:name=".readapdf" />
         <activity android:name=".pdf_open" />
+        <activity android:name=".viewactivity"/>
     </application>
 
 </manifest>

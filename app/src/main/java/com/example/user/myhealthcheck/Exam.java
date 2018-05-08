@@ -1,12 +1,13 @@
 package com.example.user.myhealthcheck;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
  * Created by (by Belal)user on 28/12/2017.
  */
 
-public class Exam {
+public class Exam implements Serializable {
     private int amka;
     private int id_doctor;
     private String type_ex;

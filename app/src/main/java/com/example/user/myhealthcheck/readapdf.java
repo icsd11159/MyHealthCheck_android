@@ -169,7 +169,7 @@ private void setV(int value){
                 id_name= pdfList.get(j).getId_e();
                 id=getV();
                // open=1;
-           open (id_name);
+           open (id_name,name_pdf);
              //   Toast.makeText(getApplicationContext(), "is new: "+ getV(), Toast.LENGTH_SHORT).show();
 
             }
@@ -182,12 +182,12 @@ private void setV(int value){
 
         }
 
-    public void open (int id_name){
+    public void open (int id_name,String name_pdf){
         open=0;
         Intent ip = new Intent(getApplicationContext(), pdf_open.class);
         String url = String.valueOf(id_name);
         //  Toast.makeText(view.getContext(), "Button clicked index = " + session.ipaddress(), Toast.LENGTH_SHORT).show();
-        ip.putExtra("key", "http://192.168.1.2/mypraxis/MyHealthCheck/src/" + url + "/");
+        ip.putExtra("key", "http://192.168.1.2/mypraxis/MyHealthCheck/src/" + url + "/"+name_pdf);
         startActivity(ip);
     }
 

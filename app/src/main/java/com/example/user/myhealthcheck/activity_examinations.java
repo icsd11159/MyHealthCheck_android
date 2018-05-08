@@ -15,9 +15,11 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ActionMenuView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -34,6 +36,7 @@ import java.io.File;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -41,25 +44,28 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class activity_examinations extends AppCompatActivity {
+public class activity_examinations extends AppCompatActivity implements Serializable {
     SessionManager session;
     // TextView listView_amka,listView_idd,listView_type,listView_nameexam,listView_result,listView_date,listView_comments;
     ArrayList<Exam> examList = new ArrayList<Exam>();
-    ArrayList<pdfname> pdfList = new ArrayList<pdfname>();
-    // private int j = 0;
+   // ArrayList<pdfname> pdfList = new ArrayList<pdfname>();
+
+    private int i;
     private Boolean isnew = true;
     private ArrayList<String> input1 = new ArrayList<String>();
     private ArrayList<String> input2 = new ArrayList<String>();
-    private TableRow row, row1, row2, row3, row4, row5, row6, row7;
+    private TableRow row7,row2;
     private TableLayout inflate;
-    private TextView txtcol1, txtcol3, txtcol4, txtcol5, txtcol6, txtcol7, txtcol8, textd, txtcola3, txtcola4, txtcola5, txtcola6, txtcola7, txtcola8;
-    private String t1 = "Id Dr:" + "      ";
-    private String t2 = "Εξέταση:" + "    ";
-    private String t3 = "Είδος:" + "      ";
-    private String t4 = "Αποτέλεσμα:" + " ";
-    private String t5 = "Ημερομηνία:" + " ";
-    private String t6 = "Σχόλια:" + "     ";
-
+    private int newid=0;
+    private TextView txtcol1;
+    public void setnewid(int newid)
+    {
+        this.newid=newid;
+    }
+    public int getnewid()
+    {
+        return newid;
+    }
     //  Button[] myButton ;
     //  Button pdf;
     @Override
@@ -176,7 +182,7 @@ public class activity_examinations extends AppCompatActivity {
        // JSONArray jsonArraypdf = new JSONArray(json);
         // String[] product = new String[jsonArray.length()];
 
-        for (int i = 0; i < jsonArray.length(); i++) {
+        for ( i = 0; i < jsonArray.length(); i++) {
 
             JSONObject obj = jsonArray.getJSONObject(i);
             //adding the product to product list
@@ -193,131 +199,45 @@ public class activity_examinations extends AppCompatActivity {
             ));
 
 
-            row = new TableRow(activity_examinations.this);
-            row1 = new TableRow(activity_examinations.this);
-            row2 = new TableRow(activity_examinations.this);
-            row3 = new TableRow(activity_examinations.this);
-            row4 = new TableRow(activity_examinations.this);
-            row5 = new TableRow(activity_examinations.this);
-            row6 = new TableRow(activity_examinations.this);
-            row7 = new TableRow(activity_examinations.this);
-            txtcol1 = new TextView(activity_examinations.this);
+            //  Button btn = new Button(this);
+            //   btn.setId(i);
+            // final int id_ = btn.getId();
+
+            // btn = ((Button) findViewById(id_));
+           if (newid!=examList.get(i).getId_e()){
 
 
-            if ((examList.get(i) != null)) {
+                row7 = new TableRow(this);
+               row2 = new TableRow(this);
+                Button btn = new Button(this);
+                btn.setId(i);
+                final int id_ = btn.getId();
+                btn.setText("Exam: " + newid+" , "+ examList.get(id_).getType()+",Date: "+ examList.get(i).getDate());
+                btn.setBackgroundColor(Color.rgb(70, 80, 90));
+               setnewid(newid);
+                //linear.addView(btn, params);
+               txtcol1 = new TextView(this);
+               txtcol1.setText("");
+               this.row2.addView(txtcol1);
+               inflate.addView(row2);
+                this.row7.addView(btn);
+                inflate.addView(row7);
+               //inflate.addView(row2);
+                btn = ((Button) findViewById(id_));
+                btn.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View view) {
 
-                txtcol1.setText(input1.get(i));
+                        Intent intent = new Intent(activity_examinations.this, viewactivity.class);
+                        // ArrayList<String> myList = new ArrayList<String>();
+                        Bundle args = new Bundle();
+                        args.putSerializable("examlist",(Serializable)examList);
+                        intent.putExtra("BUNDLE",args);
+                        intent.putExtra("id_e",examList.get(id_).getId_e());
+                        startActivity(intent);
 
-
-            } else {
-                txtcol1.setText("");
+                    }
+                });
             }
-            row.addView(txtcol1);
-            inflate.addView(row);
-            txtcola3 = new TextView(activity_examinations.this);
-            txtcola4 = new TextView(activity_examinations.this);
-            txtcola5 = new TextView(activity_examinations.this);
-            txtcola6 = new TextView(activity_examinations.this);
-            txtcola7 = new TextView(activity_examinations.this);
-            txtcola8 = new TextView(activity_examinations.this);
-            txtcol3 = new TextView(activity_examinations.this);
-            txtcol4 = new TextView(activity_examinations.this);
-            txtcol5 = new TextView(activity_examinations.this);
-            txtcol6 = new TextView(activity_examinations.this);
-            txtcol7 = new TextView(activity_examinations.this);
-            txtcol8 = new TextView(activity_examinations.this);
-
-
-            if (examList.get(i) != null) {
-
-                //  txtcol2.setText(examList.get(i).getAmka());
-
-
-                txtcola3.setText(t1);
-                txtcola4.setText(t2);
-                txtcola5.setText(t3);
-                txtcola6.setText(t4);
-                txtcola7.setText(t5);
-                txtcola8.setText(t6);
-                txtcol3.setText(String.valueOf(examList.get(i).getid_doctor()));
-                txtcol4.setText(String.valueOf(examList.get(i).getName_exam()));
-                txtcol5.setText(examList.get(i).getType());
-                txtcol7.setText(examList.get(i).getDate());
-                txtcol8.setText(examList.get(i).getComments());
-                // txtcol9.setText(examList.get(i).getComments());
-            } else {
-                txtcol1.setText("");
-                txtcol3.setText("");
-                txtcol4.setText("");
-                txtcol5.setText("");
-                txtcol6.setText("");
-                txtcol7.setText("");
-                txtcol8.setText("");
-
-            }
-            this.row1.addView(txtcola7);
-            this.row1.addView(txtcol7);
-            inflate.addView(row1);
-            this.row2.addView(txtcola3);
-            this.row2.addView(txtcol3);
-            inflate.addView(row2);
-            this.row3.addView(txtcola4);
-            this.row3.addView(txtcol4);
-            inflate.addView(row3);
-            this.row4.addView(txtcola5);
-            this.row4.addView(txtcol5);
-            inflate.addView(row4);
-            this.row5.addView(txtcola6);
-            this.row5.addView(txtcol6);
-            inflate.addView(row5);
-            this.row6.addView(txtcola8);
-            this.row6.addView(txtcol8);
-            inflate.addView(row6);
-
-            // String[] product = new String[jsonArray.length()];
-            Button btn = new Button(this);
-            btn.setId(i);
-            final int id_ = btn.getId();
-            btn.setText("PDF for Exam: " + examList.get(id_).getId_e());
-            btn.setBackgroundColor(Color.rgb(70, 80, 90));
-            //linear.addView(btn, params);
-            this.row7.addView(btn);
-            inflate.addView(row7);
-            btn = ((Button) findViewById(id_));
-            btn.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View view) {
-
-
-                    // ViewPdf pdf = new ViewPdf();
-                    // pdf.downloadPDF(examList.get(id_).getfile());
-                    //Run the code in a different thread than the UI thread
-                    //  Thread thread = new Thread() {
-                    //   @Override
-                    //public void run() {
-                    Intent i = new Intent(getApplicationContext(), readapdf.class);
-                //    AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.autocomplete);
-                  //  String getrec=textView.getText().toString();
-
-//Create the bundle
-                    Bundle bundle = new Bundle();
-
-//Add your data to bundle
-                    bundle.putInt("value",examList.get(id_).getId_e() );
-
-//Add the bundle to the intent
-                    i.putExtras(bundle);
-
-//Fire that second activity
-                    startActivity(i);
-                  //  Intent v = new Intent(getApplicationContext(), readpdf.class);
-                   // Integer url = examList.get(id_).getId_e();
-
-
-                   // v.putExtra("no",  url );
-                   // startActivity(v);
-                }
-            });
-
         }
     }
 

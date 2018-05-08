@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['upload'])) {
 	$id_e=$_POST['$id_e'];
 //echo "ide2 now :",$id_e;
 //$file=$_POST['$file'] ;
-          $file = rand(1000,100000)."-".$_FILES['file']['name'];
+          $file = $_FILES['file']['name'];
 		 $file_loc = $_FILES['file']['tmp_name'];
 		$file_size = $_FILES['file']['size'];
 		$file_type = $_FILES['file']['type'];
