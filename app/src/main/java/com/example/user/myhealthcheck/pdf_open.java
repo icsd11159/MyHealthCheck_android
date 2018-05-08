@@ -11,6 +11,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import java.io.File;
+
 public class pdf_open extends AppCompatActivity {
     private String value;
     Context context;
@@ -53,8 +55,10 @@ public class pdf_open extends AppCompatActivity {
 
             myWebView.loadUrl(value);
         }
-        myWebView.setWebViewClient(new MyWebViewClient());
 
+        myWebView.setWebViewClient(new MyWebViewClient());
+        MyWebViewClient v=new MyWebViewClient();
+        v.shouldOverrideUrlLoading(myWebView , value);
     }
     @SuppressLint("JavascriptInterface")
     private class MyWebViewClient extends WebViewClient {
@@ -68,7 +72,13 @@ public class pdf_open extends AppCompatActivity {
                 return false;
             }
             // Otherwise, the link is not for a page on my site, so launch another Activity that handles URLs
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            File pdfFile = new File(url);
+
+            Uri path = Uri.fromFile(pdfFile);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(path, "application/pdf");
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+          //  Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             startActivity(intent);
             return true;
         }

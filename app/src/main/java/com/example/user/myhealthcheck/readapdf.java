@@ -186,6 +186,7 @@ private void setV(int value){
         open=0;
         Intent ip = new Intent(getApplicationContext(), pdf_open.class);
         String url = String.valueOf(id_name);
+        Toast.makeText(getApplicationContext(), "is value : "+name_pdf+" url: "+url,Toast.LENGTH_SHORT).show();
         //  Toast.makeText(view.getContext(), "Button clicked index = " + session.ipaddress(), Toast.LENGTH_SHORT).show();
         ip.putExtra("key", "http://192.168.1.2/mypraxis/MyHealthCheck/src/" + url + "/"+name_pdf);
         startActivity(ip);

@@ -49,7 +49,7 @@ public class viewactivity extends AppCompatActivity implements Serializable {
         seti(id_e);
         input1.add(id_e);
 
-        Toast.makeText(getApplicationContext(), "is value : "+geti(),Toast.LENGTH_SHORT).show();
+
         view();
       // j = getIntent().getStringExtra("id");
 //Extract the data…
@@ -62,7 +62,7 @@ public class viewactivity extends AppCompatActivity implements Serializable {
         for (int i = 0; i < examList.size(); i++) {
 
             if (examList.get(i).getId_e() == geti()) {
-                seti(input1.get(i));
+                seti(examList.get(i).getId_e());
                 //  row = new TableRow(activity_examinations.this);
               //  row = new TableRow(this);
                 row1 = new TableRow(this);

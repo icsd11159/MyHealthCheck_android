@@ -212,9 +212,9 @@ public class activity_examinations extends AppCompatActivity implements Serializ
                 Button btn = new Button(this);
                 btn.setId(i);
                 final int id_ = btn.getId();
-                btn.setText("Exam: " + newid+" , "+ examList.get(id_).getType()+",Date: "+ examList.get(i).getDate());
+                btn.setText("Exam: " + examList.get(i).getId_e()+" , "+ examList.get(id_).getType()+",Date: "+ examList.get(i).getDate());
                 btn.setBackgroundColor(Color.rgb(70, 80, 90));
-               setnewid(newid);
+               final int newidd=examList.get(i).getId_e();
                 //linear.addView(btn, params);
                txtcol1 = new TextView(this);
                txtcol1.setText("");
@@ -232,7 +232,7 @@ public class activity_examinations extends AppCompatActivity implements Serializ
                         Bundle args = new Bundle();
                         args.putSerializable("examlist",(Serializable)examList);
                         intent.putExtra("BUNDLE",args);
-                        intent.putExtra("id_e",examList.get(id_).getId_e());
+                        intent.putExtra("id_e",newidd);
                         startActivity(intent);
 
                     }
