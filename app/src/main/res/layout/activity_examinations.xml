@@ -6,12 +6,29 @@
     android:layout_height="match_parent"
     tools:context="com.example.user.myhealthcheck.activity_examinations">
 
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="168dp"
+        android:paddingBottom="@android:dimen/app_icon_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/scrollView2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/fonto_eksetaseis"
+        tools:constraintSet="@mipmap/fonto_eksetaseis" />
+
     <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:fitsSystemWindows="true"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="56dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
         <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"

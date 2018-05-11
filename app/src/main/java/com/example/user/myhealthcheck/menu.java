@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 
-
+//photo of menu http://4-designer.com/2014/01/Hospital-cartoon-icon-vector/#.WvSeIIiFPIU
 public class menu extends AppCompatActivity {
     SessionManager session;
     @Override
@@ -34,7 +34,8 @@ public class menu extends AppCompatActivity {
 
         ImageButton imgbtn = (ImageButton) findViewById(R.id.imageButton3);
         ImageButton imgbtn6 = (ImageButton) findViewById(R.id.imageButton6);
-        Button sosn = (Button) findViewById(R.id.sosn);
+        ImageButton sosn = (ImageButton) findViewById(R.id.sosn);
+        ImageButton btm = (ImageButton) findViewById(R.id.backtomain);
         TextView notcon = (TextView) findViewById(R.id.notcon);
 
         imgbtn.setOnClickListener(new View.OnClickListener() {
@@ -104,18 +105,7 @@ public class menu extends AppCompatActivity {
             }
 
         });
-       ImageButton main = (ImageButton) findViewById(R.id.buttonmain);
-        main.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-
-                Intent menu = new Intent(context, MainActivity.class);
-                startActivity(menu);
-
-            }
-
-        });
       //  ImageButton imgbtn6 = (ImageButton) findViewById(R.id.imageButton6);
         imgbtn6.setOnClickListener(new View.OnClickListener() {
 
@@ -124,12 +114,23 @@ public class menu extends AppCompatActivity {
 
                 Intent i = new Intent(getApplicationContext(), pdf_open.class);
                 //String url= String.valueOf(examList.get(id_).getId_e());
-                i.putExtra("key", session.ipaddress()+"/mypraxis/MyHealthCheck/app/build/generated/assets/049_Πρώτες Βοήθειες.pdf");
+                i.putExtra("key", "http://192.168.1.2/mypraxis/MyHealthCheck/app/build/generated/assets/049_Πρώτες Βοήθειες.pdf");
                 startActivity(i);
             }
 
         });
+        btm.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                //String url= String.valueOf(examList.get(id_).getId_e());
+               // i.putExtra("key", "http://192.168.1.2/mypraxis/MyHealthCheck/app/build/generated/assets/049_Πρώτες Βοήθειες.pdf");
+                startActivity(i);
+            }
+
+        });
         sosn.setOnClickListener(new View.OnClickListener() {
 
             @Override

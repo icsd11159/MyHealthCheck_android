@@ -11,6 +11,16 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.user.myhealthcheck.menu">
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/textView2"
+        android:layout_marginTop="16dp"
+        app:srcCompat="@mipmap/fontomenu" />
+
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="wrap_content"
@@ -27,9 +37,9 @@
         android:id="@+id/imageButton3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/textView2"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_below="@+id/imageButton"
+        android:layout_alignLeft="@+id/imageView2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/imageView2"
         android:clickable="true"
         android:src="@mipmap/sos" />
 
@@ -43,14 +53,6 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/colorPrimary" />
 
-    <ImageButton
-        android:id="@+id/buttonmain"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/imageButton3"
-        android:layout_toRightOf="@+id/imageButton3"
-        app:srcCompat="@mipmap/back" />
 
     <TextView
         android:id="@+id/notcon"
@@ -60,6 +62,7 @@
         android:layout_alignRight="@+id/imageButton6"
         android:layout_below="@+id/textView2"
         android:text="Για να δείτε τις εξετάσεις σας παρακαλώ συνδεθείτε.Για να εκτελεσθεί γρηγορότερα το κουμπί sos,παρακαλώ,χρησιμοποιήστε την δραστηριότητα 'Εισαγωγή SOS αριθμού'" />
+
 
     <TextView
         android:id="@+id/textView6"
@@ -73,28 +76,15 @@
         android:text="Οι εξετάσεις μου"
         android:textColor="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color" />
 
-    <Button
-        android:id="@+id/sosn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/buttonmain"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/imageButton6"
-        android:layout_marginBottom="14dp"
-        android:layout_toEndOf="@+id/imageButton3"
-        android:layout_toRightOf="@+id/imageButton3"
-        android:background="@android:drawable/ic_input_add"
-        android:text="Εισαγωγή SOS αριθμού"
-        android:textColor="?android:attr/textColorSecondary" />
+
 
     <ImageButton
         android:id="@+id/imageButton6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageButton"
-        android:layout_toEndOf="@+id/imageButton3"
-        android:layout_toRightOf="@+id/imageButton3"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/textView2"
+        android:layout_toRightOf="@+id/textView2"
         app:srcCompat="@mipmap/frst" />
 
     <TextView
@@ -106,5 +96,27 @@
         android:layout_alignStart="@+id/imageButton6"
         android:text="Πρώτες Βοήθειες"
         android:textColor="@color/colorPrimaryDark" />
+
+    <ImageButton
+        android:id="@+id/sosn"
+        android:layout_width="120dp"
+        android:layout_height="100dp"
+        android:layout_above="@+id/imageButton3"
+        android:layout_alignEnd="@+id/textView2"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="37dp"
+        android:layout_marginRight="37dp"
+        app:srcCompat="@mipmap/phoneadd" />
+
+    <ImageButton
+        android:id="@+id/backtomain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView2"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        app:srcCompat="@mipmap/back" />
+
 
 </RelativeLayout>

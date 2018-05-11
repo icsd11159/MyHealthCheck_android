@@ -56,7 +56,7 @@ public class send_sos_message extends FragmentActivity implements OnMapReadyCall
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
-    SessionManager session=new SessionManager(send_sos_message.this);
+ SessionManager session=new SessionManager(getApplicationContext());
     private GoogleMap mMap;
     double latitude;
     double longitude;
@@ -278,7 +278,7 @@ public class send_sos_message extends FragmentActivity implements OnMapReadyCall
 
         Log.d("onLocationChanged", String.format("latitude:%.3f longitude:%.3f",latitude,longitude));
 
-        getJSON(session.ipaddress()+"/mypraxis/MyHealthCheck/getsosnumber.php");
+        getJSON("http://192.168.1.2/mypraxis/MyHealthCheck/getsosnumber.php");
         //stop location updates
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
@@ -452,7 +452,7 @@ public class send_sos_message extends FragmentActivity implements OnMapReadyCall
 
                     //StringBuilder object to read the string from the service
                     StringBuilder sb = new StringBuilder();
-                    session = new SessionManager(send_sos_message.this);
+                   session = new SessionManager(getApplicationContext());
                     HashMap<String, String> user = session.getUserDetails();
 
                     // name

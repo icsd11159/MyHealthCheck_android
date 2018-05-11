@@ -1,9 +1,15 @@
 package com.example.user.myhealthcheck;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.util.Linkify;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -31,6 +37,7 @@ private int id;
 private int open=0;
     private int id_name;
     String name_pdf;
+
 private void setV(int value){
     this.value=value;
 }
@@ -44,13 +51,16 @@ private void setV(int value){
         SessionManager s = new SessionManager(readapdf.this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_readapdf);
+
         //Get the bundle
         Bundle bundle = getIntent().getExtras();
 
 //Extract the data…
         int value = bundle.getInt("value");
         setV(value);
+
     //    Toast.makeText(getApplicationContext(), "is value : "+ value,Toast.LENGTH_SHORT).show();
+
         getJSON("http://192.168.1.2/mypraxis/MyHealthCheck/pdfname.php");
     }
 
@@ -165,13 +175,36 @@ private void setV(int value){
             ));
 
             if(pdfList.get(j).getId_e()==getV()) {
-                name_pdf = pdfList.get(j).getname();
+
+
+
+
+                name_pdf=pdfList.get(j).getname();
+
                 id_name= pdfList.get(j).getId_e();
                 id=getV();
+                open (id_name,name_pdf);
                // open=1;
-           open (id_name,name_pdf);
-             //   Toast.makeText(getApplicationContext(), "is new: "+ getV(), Toast.LENGTH_SHORT).show();
+              //  final TextView  myClickableUrl = (TextView)findViewById(R.id.TextView1);
+            //  myClickableUrl.setText("http://192.168.1.2/mypraxis/MyHealthCheck/src/" + id_name + "/"+name_pdf);
 
+              // Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://192.168.1.2/mypraxis/MyHealthCheck/src/" + id_name + "/"+name_pdf));
+              //  startActivity(browserIntent);
+               // Intent intent = new Intent(Intent.ACTION_VIEW);
+
+           //     intent.setDataAndType(Uri.parse( "http://docs.google.com/viewer?url=" + "http://192.168.1.2/mypraxis/MyHealthCheck/src/" + id_name + "/"+name_pdf), "text/html");
+
+              //  startActivity(intent);
+                //String html = "My link is <a href=\"http://192.168.1.2/mypraxis/MyHealthCheck/src/\" + id_name + \"/\"+name_pdf>here</a>";
+               // myClickableUrl.setClickable(true);
+              //  myClickableUrl .setText(Html.fromHtml(html));
+              //  Linkify.addLinks("http://192.168.1.2/mypraxis/MyHealthCheck/src/" + id_name + "/"+name_pdf, Linkify.WEB_URLS);
+             //   Toast.makeText(getApplicationContext(), "is new: "+ getV(), Toast.LENGTH_SHORT).show();
+              ////  WebView webView=(WebView)findViewById(R.id.webView1);
+               // webView.getSettings().setJavaScriptEnabled(true);
+              ////  webView.setWebViewClient(new Callback());
+              //  String url="http://192.168.1.2/mypraxis/MyHealthCheck/src/" + id_name + "/"+name_pdf;
+              //  webView.loadUrl("https://docs.google.com/viewer?url=" + url);
             }
 
         }
@@ -188,8 +221,12 @@ private void setV(int value){
         String url = String.valueOf(id_name);
         Toast.makeText(getApplicationContext(), "is value : "+name_pdf+" url: "+url,Toast.LENGTH_SHORT).show();
         //  Toast.makeText(view.getContext(), "Button clicked index = " + session.ipaddress(), Toast.LENGTH_SHORT).show();
-        ip.putExtra("key", "http://192.168.1.2/mypraxis/MyHealthCheck/src/" + url + "/"+name_pdf);
+        Uri uri = Uri.parse("http://192.168.1.2/mypraxis/MyHealthCheck/app/src/asset/"+name_pdf); // missing 'http://' will cause crashed
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
+        ip.putExtra("key", "http://192.168.1.2/mypraxis/MyHealthCheck/app/src/"+name_pdf);
         startActivity(ip);
+
     }
 
 }

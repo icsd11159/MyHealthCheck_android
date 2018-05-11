@@ -9,13 +9,14 @@ import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
 public class MainActivity extends AppCompatActivity{
-    Button button;
-    Button button2,connect;
+    ImageButton button,button2;
+    Button connect;
     // Alert Dialog Manager
    // AlertDialogManager alert = new AlertDialogManager();
     TextView lblName,lblName1;
@@ -75,8 +76,8 @@ public class MainActivity extends AppCompatActivity{
 
         final Context context = this;
 
-        button = (Button) findViewById(R.id.button);
-        button2 = (Button) findViewById(R.id.button2);
+        button = (ImageButton) findViewById(R.id.button);
+        button2 = (ImageButton) findViewById(R.id.button2);
 
 
 
