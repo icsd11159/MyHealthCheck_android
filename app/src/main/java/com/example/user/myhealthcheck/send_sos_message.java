@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.provider.Telephony;
@@ -56,7 +57,6 @@ public class send_sos_message extends FragmentActivity implements OnMapReadyCall
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
- SessionManager session=new SessionManager(getApplicationContext());
     private GoogleMap mMap;
     double latitude;
     double longitude;
@@ -66,12 +66,12 @@ public class send_sos_message extends FragmentActivity implements OnMapReadyCall
     Marker mCurrLocationMarker;
     LocationRequest mLocationRequest;
     private String StateName,CityName,CountryName,Address,url,line ;
-
+    SessionManager session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-
+         session=new SessionManager(getApplicationContext());
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
         }
@@ -208,7 +208,7 @@ public class send_sos_message extends FragmentActivity implements OnMapReadyCall
         googlePlacesUrl.append("&radius=" + PROXIMITY_RADIUS);
         googlePlacesUrl.append("&type=" + nearbyPlace);
         googlePlacesUrl.append("&sensor=true");
-        googlePlacesUrl.append("&key=" + "AIzaSyAMsSDm2Crs9QPyDE6yclPYYtQPc6yJAOc");
+        googlePlacesUrl.append("&key=" + "AIzaSyA3u0pYSPxp4NZ9ePb9zPeX_dm5NWKkGhg");
         Log.d("getUrl", googlePlacesUrl.toString());
         return (googlePlacesUrl.toString());
     }
@@ -374,18 +374,26 @@ public class send_sos_message extends FragmentActivity implements OnMapReadyCall
         smsBody.append(",");
         smsBody.append(currentLocation.getLongitude());
         smsBody.append("Πατήστε το λινκ για να μεταφερθείτε στο ακριβές σημείο του ασθενούς ");
-        smsBody.append("https://www.google.com/maps/@?api=1&map_action=pano&");
+        smsBody.append("https://www.google.com/maps/?q=");
         smsBody.append(currentLocation.getLatitude() );
         smsBody.append(",");
         smsBody.append(currentLocation.getLongitude());
+        //smsBody.append(",");
+       // smsBody.append(currentLocation.getAltitude());
         smsBody.append(" Από την εφαρμογή MyHealthCkeck");
-        final String myPackageName = getPackageName();
+        //final String myPackageName = getPackageName();
         //if(SOSnumber.isEmpty() || SOSnumber.equals("0")){ //gia na ginei pio grhgora na stalei mesw ths efarmoghs tou kinhtou built-sms
             Intent sendIntent = new Intent(Intent.ACTION_VIEW);
             sendIntent.putExtra("address"  , new String(SOSnumber));
-            sendIntent.putExtra("sms_body", smsBody.toString());
-            sendIntent.setType("vnd.android-dir/mms-sms");
-            startActivity(sendIntent);
+           sendIntent.putExtra("sms_body", smsBody.toString());
+       //1 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + SOSnumber));
+       //1 intent.putExtra("sms_body", smsBody.toString());
+      // startActivity(intent);
+      // SmsManager sms = SmsManager.getDefault();
+        //sms.sendTextMessage(SOSnumber, null, smsBody.toString(), null, null);
+
+           sendIntent.setType("vnd.android-dir/mms-sms");
+          startActivity(sendIntent);
     //}
             //else {
 

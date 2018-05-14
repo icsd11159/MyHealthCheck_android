@@ -53,6 +53,11 @@ public class menu extends AppCompatActivity {
                 builder.setCancelable(false);
                 builder.setPositiveButton("Yes, i'm on emergency !", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        HashMap<String, String> user = session.getUserDetails();
+
+                        // name
+                        String amka_user = user.get(SessionManager.KEY_NAME);
+
                         Toast.makeText(menu.this, "positive button", Toast.LENGTH_SHORT).show();
                         //builder.finish();
                         Intent menu = new Intent(context, send_sos_message.class);

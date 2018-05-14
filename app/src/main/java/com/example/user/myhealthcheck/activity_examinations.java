@@ -51,13 +51,14 @@ public class activity_examinations extends AppCompatActivity implements Serializ
    // ArrayList<pdfname> pdfList = new ArrayList<pdfname>();
 
     private int i;
-    private Boolean isnew = true;
+   // private Boolean isnew = true;
     private ArrayList<String> input1 = new ArrayList<String>();
     private ArrayList<String> input2 = new ArrayList<String>();
     private TableRow row7,row2;
     private TableLayout inflate;
     private int newid=0;
     private TextView txtcol1;
+    public boolean isnew=true;
     public void setnewid(int newid)
     {
         this.newid=newid;
@@ -68,6 +69,7 @@ public class activity_examinations extends AppCompatActivity implements Serializ
     }
     //  Button[] myButton ;
     //  Button pdf;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -204,6 +206,7 @@ public class activity_examinations extends AppCompatActivity implements Serializ
             // final int id_ = btn.getId();
 
             // btn = ((Button) findViewById(id_));
+
            if (newid!=examList.get(i).getId_e()){
 
 
@@ -237,6 +240,7 @@ public class activity_examinations extends AppCompatActivity implements Serializ
 
                     }
                 });
+               newid=examList.get(i).getId_e();//gia na mhn tupwnei parametro ths idias eksetash
             }
         }
     }

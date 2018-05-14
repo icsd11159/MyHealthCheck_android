@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.util.Linkify;
+import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
@@ -188,8 +189,7 @@ private void setV(int value){
               //  final TextView  myClickableUrl = (TextView)findViewById(R.id.TextView1);
             //  myClickableUrl.setText("http://192.168.1.2/mypraxis/MyHealthCheck/src/" + id_name + "/"+name_pdf);
 
-              // Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://192.168.1.2/mypraxis/MyHealthCheck/src/" + id_name + "/"+name_pdf));
-              //  startActivity(browserIntent);
+
                // Intent intent = new Intent(Intent.ACTION_VIEW);
 
            //     intent.setDataAndType(Uri.parse( "http://docs.google.com/viewer?url=" + "http://192.168.1.2/mypraxis/MyHealthCheck/src/" + id_name + "/"+name_pdf), "text/html");
@@ -221,12 +221,14 @@ private void setV(int value){
         String url = String.valueOf(id_name);
         Toast.makeText(getApplicationContext(), "is value : "+name_pdf+" url: "+url,Toast.LENGTH_SHORT).show();
         //  Toast.makeText(view.getContext(), "Button clicked index = " + session.ipaddress(), Toast.LENGTH_SHORT).show();
-        Uri uri = Uri.parse("http://192.168.1.2/mypraxis/MyHealthCheck/app/src/asset/"+name_pdf); // missing 'http://' will cause crashed
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        startActivity(intent);
-        ip.putExtra("key", "http://192.168.1.2/mypraxis/MyHealthCheck/app/src/"+name_pdf);
+             //+"/"+name_pdf gives the whole with pdf but there is something with permissions
+        ip.putExtra("key", "http://192.168.1.2/mypraxis/MyHealthCheck/src/" + url+"/" );
         startActivity(ip);
 
+    }
+    public void browser1(View view){
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://192.168.1.2/mypraxis/MyHealthCheck/src/" + id_name + "/"+name_pdf));
+        startActivity(browserIntent);
     }
 
 }
