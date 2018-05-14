@@ -110,6 +110,9 @@ public class sos_number extends AppCompatActivity {
 
                     String number_sos= edit_phone.getText().toString();
                     String history= edit_history.getText().toString();
+                    if(history.isEmpty()){
+                        history="υγειής";
+                    }
                    // Toast.makeText(getApplicationContext(), "HISTORY :"+history, Toast.LENGTH_LONG).show();
                     session = new SessionManager(getApplicationContext());
                     HashMap<String, String> user = session.getUserDetails();

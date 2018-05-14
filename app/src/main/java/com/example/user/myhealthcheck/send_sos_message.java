@@ -49,6 +49,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -368,7 +369,7 @@ public class send_sos_message extends FragmentActivity implements OnMapReadyCall
         SmsManager smsManager = SmsManager.getDefault();
         StringBuffer smsBody = new StringBuffer();
 
-        smsBody.append("Ο "+name+" "+surname+" με ιστορικο "+history+" και άμκα:"+amka+" βρίσκεται σε κίνδυνο στην τοποθεσία:"+line+" με τις εξής συντεταγμένες");
+        smsBody.append("Ο  "+name+" "+surname+" με ιστορικο "+history+" και άμκα:"+amka+" βρίσκεται σε κίνδυνο στην τοποθεσία:"+line+" με τις εξής συντεταγμένες");
 
         smsBody.append(currentLocation.getLatitude());
         smsBody.append(",");
@@ -381,19 +382,23 @@ public class send_sos_message extends FragmentActivity implements OnMapReadyCall
         //smsBody.append(",");
        // smsBody.append(currentLocation.getAltitude());
         smsBody.append(" Από την εφαρμογή MyHealthCkeck");
-        //final String myPackageName = getPackageName();
+        final String myPackageName = getPackageName();
         //if(SOSnumber.isEmpty() || SOSnumber.equals("0")){ //gia na ginei pio grhgora na stalei mesw ths efarmoghs tou kinhtou built-sms
-            Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-            sendIntent.putExtra("address"  , new String(SOSnumber));
-           sendIntent.putExtra("sms_body", smsBody.toString());
-       //1 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + SOSnumber));
-       //1 intent.putExtra("sms_body", smsBody.toString());
-      // startActivity(intent);
-      // SmsManager sms = SmsManager.getDefault();
-        //sms.sendTextMessage(SOSnumber, null, smsBody.toString(), null, null);
+       Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+        sendIntent.putExtra("address"  , new String(SOSnumber));
+        sendIntent.putExtra("sms_body", smsBody.toString());
+       // Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + SOSnumber.toString()));
+        //intent.putExtra("sms_body", smsBody.toString());
+     // startActivity(intent);
+    //  SmsManager sms = SmsManager.getDefault();
+     //   sms.sendTextMessage(SOSnumber, null, smsBody.toString(), null, null);
 
-           sendIntent.setType("vnd.android-dir/mms-sms");
-          startActivity(sendIntent);
+          sendIntent.setType("vnd.android-dir/mms-sms");
+         startActivity(sendIntent);
+       // SmsManager sms = SmsManager.getDefault();
+
+      //  sms.sendTextMessage(SOSnumber, null, smsBody.toString(),  null, null);
+     //   Toast.makeText(this, "Sent.", Toast.LENGTH_SHORT).show();
     //}
             //else {
 
