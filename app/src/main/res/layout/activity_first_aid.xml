@@ -18,100 +18,131 @@
         <TextView
             android:id="@+id/textView12"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="31dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:text="Πρώτες Βοήθειες"
             android:textColor="@color/colorPrimaryDark" />
+
         <TextView
             android:id="@+id/cl"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="32dp"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
             android:layout_below="@+id/textView12"
-            android:text="                 Τηλέφωνα Έκτακτης Ανάγκης" />
+            android:layout_centerHorizontal="true"
+            android:fontFamily="serif"
+            android:text="                 Τηλέφωνα Έκτακτης Ανάγκης"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/cl"
+            android:layout_height="315dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:layout_below="@+id/cl"
             app:srcCompat="@mipmap/callssos" />
 
 
-    <TextView
-        android:id="@+id/anaz"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView4"
-        android:layout_marginLeft="19dp"
-        android:layout_marginStart="19dp"
-        android:background="@color/colorAccent"
-        android:text="Διαδικασία Αναζωογόνησης" />
+        <TextView
+            android:id="@+id/anaz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView4"
+            android:layout_marginLeft="19dp"
+            android:layout_marginStart="19dp"
+            android:background="@color/colorAccent"
+            android:linksClickable="false"
+            android:outlineProvider="background"
+            android:text="1.Διαδικασία Αναζωογόνησης"
+            android:textAllCaps="false"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="18sp"
+            tools:background="?android:attr/colorControlActivated"
+            tools:lineSpacingExtra="8sp" />
 
 
         <TextView
             android:id="@+id/karpa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/anaz"
             android:layout_marginLeft="19dp"
             android:layout_marginStart="19dp"
-            android:layout_below="@+id/anaz"
             android:background="@color/colorAccent"
             android:clickable="true"
-            android:text="ΚΑΡΠΑ" />
+            android:outlineProvider="bounds"
+            android:text="2.ΚΑΡΠΑ"
+            android:textColor="@color/cardview_dark_background"
+            tools:lineSpacingExtra="8sp"
+            tools:textSize="18sp" />
+
         <TextView
-        android:id="@+id/asthma"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/karpa"
-        android:layout_marginTop="21dp"
+            android:id="@+id/asthma"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/karpa"
             android:layout_marginLeft="19dp"
             android:layout_marginStart="19dp"
-        android:background="@color/colorAccent"
-        android:clickable="true"
-        android:text="Άσθμα" />
+            android:layout_marginTop="21dp"
+            android:background="@color/colorAccent"
+            android:clickable="true"
+            android:lineSpacingExtra="8sp"
+            android:outlineProvider="background"
+            android:text="3.Άσθμα"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="18sp" />
 
 
-    <TextView
-        android:id="@+id/pnigm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="19dp"
-        android:layout_marginStart="19dp"
-        android:layout_below="@+id/asthma"
-        android:background="@color/colorAccent"
-        android:clickable="true"
-        android:text="Πνιγμονή" />
+        <TextView
+            android:id="@+id/pnigm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/asthma"
+            android:layout_marginLeft="19dp"
+            android:layout_marginStart="19dp"
+            android:background="@color/colorAccent"
+            android:clickable="true"
+            android:lineSpacingExtra="8sp"
+            android:text="4.Πνιγμονή"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="18sp"
+            tools:outlineProvider="background" />
 
-    <TextView
-        android:id="@+id/hlektro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="19dp"
-        android:layout_marginStart="19dp"
-        android:layout_below="@+id/pnigm"
-        android:background="@color/colorAccent"
-        android:clickable="true"
-        android:text="Ηλεκτροπληξία" />
+        <TextView
+            android:id="@+id/hlektro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pnigm"
+            android:layout_marginLeft="19dp"
+            android:layout_marginStart="19dp"
+            android:background="@color/colorAccent"
+            android:clickable="true"
+            android:lineSpacingExtra="8sp"
+            android:outlineProvider="background"
+            android:text="5.Ηλεκτροπληξία"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="18sp" />
 
 
-    <TextView
-        android:id="@+id/heart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="19dp"
-        android:layout_marginStart="19dp"
-        android:layout_below="@+id/hlektro"
-        android:layout_toEndOf="@+id/odhgies"
-        android:layout_toRightOf="@+id/odhgies"
-        android:background="@color/colorAccent"
-        android:clickable="true"
-        android:text="Καρδιακή Προσβολή" />
+        <TextView
+            android:id="@+id/heart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/hlektro"
+            android:layout_marginLeft="19dp"
+            android:layout_marginStart="19dp"
+            android:layout_toEndOf="@+id/odhgies"
+            android:layout_toRightOf="@+id/odhgies"
+            android:background="@color/colorAccent"
+            android:clickable="true"
+            android:lineSpacingExtra="8sp"
+            android:outlineProvider="background"
+            android:text="6.Καρδιακή Προσβολή"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="18sp" />
 
 
     <TextView

@@ -25,8 +25,8 @@ public class viewactivity extends AppCompatActivity implements Serializable {
   //  private String t4 = "Αποτέλεσμα:" + " ";
     private String t5 = "Ημερομηνία:" + " ";
     private String t6 = "Σχόλια:" + "     ";
-    private String t10 = "Τα ";
-    private String t11 = "   ----------------------------------------------------------  ";
+    private String t10 = "| ";
+    private String t11 = "- ";
     private int id_e;
      ArrayList<Exam> examList;
  //   Bundle bundle;
@@ -134,7 +134,7 @@ public class viewactivity extends AppCompatActivity implements Serializable {
 
                      txtcol4.setText(String.valueOf(examList.get(i).getName_exam()));
                      txtcol8.setText(examList.get(i).getComments());
-                     txtcol11.setText(".......");
+                     txtcol11.setText(".........................................................");
 
 
                 this.row3.addView(txtcola4);

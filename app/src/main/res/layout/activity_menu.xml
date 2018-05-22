@@ -95,7 +95,8 @@
         android:layout_alignLeft="@+id/imageButton6"
         android:layout_alignStart="@+id/imageButton6"
         android:text="Πρώτες Βοήθειες"
-        android:textColor="@color/colorPrimaryDark" />
+        android:textColor="@android:color/holo_red_light"
+        android:textStyle="bold" />
 
     <ImageButton
         android:id="@+id/sosn"
