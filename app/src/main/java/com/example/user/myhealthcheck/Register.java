@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 /**
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 public class Register extends AppCompatActivity {
     EditText UsernameEt, PasswordEt,NameEt,SurnameEt,AmkaEt,EmailEt,RePassEt,Sosn;
+    private String gender;
     Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,22 @@ public class Register extends AppCompatActivity {
         RePassEt = (EditText) findViewById(R.id.input_reEnterPassword);
         Sosn = (EditText) findViewById(R.id.text_sosnu);
 
+    }
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.male:
+                if (checked)
+                    gender="male";
+                    break;
+            case R.id.female:
+                if (checked)
+                    gender="female";
+                    break;
+        }
     }
     public void OnSignup(View view) {
         String username = UsernameEt.getText().toString();
@@ -47,7 +65,7 @@ public class Register extends AppCompatActivity {
 
             String type = "register";
             BackgroundWorker backgroundWorker = new BackgroundWorker(this);
-            backgroundWorker.execute(type, username, password ,name,surname,amka,email,sosn);
+            backgroundWorker.execute(type, username, password ,name,surname,amka,email,sosn,gender);
         }else{
             Toast.makeText(context, "Passwords don't match,please write one password!", Toast.LENGTH_SHORT).show();
         }

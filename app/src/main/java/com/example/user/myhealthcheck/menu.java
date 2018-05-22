@@ -117,9 +117,9 @@ public class menu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(getApplicationContext(), pdf_open.class);
+                Intent i = new Intent(getApplicationContext(), first_aid.class);
                 //String url= String.valueOf(examList.get(id_).getId_e());
-                i.putExtra("key", "http://192.168.1.2/mypraxis/MyHealthCheck/app/build/generated/assets/049_Πρώτες Βοήθειες.pdf");
+              //  i.putExtra("key", "http://192.168.1.2/mypraxis/MyHealthCheck/app/build/generated/assets/049_Πρώτες Βοήθειες.pdf");
                 startActivity(i);
             }
 

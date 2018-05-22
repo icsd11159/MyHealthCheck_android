@@ -46,8 +46,8 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
         SessionManager n=new SessionManager(context);
 
         String type = params[0];
-        String login_url = "http://192.168.1.2/mypraxis/MyHealthCheck/login.php";
-        String register_url = "http://192.168.1.2/mypraxis/MyHealthCheck/register.php";
+        String login_url = "http://192.168.1.4/mypraxis/MyHealthCheck/login.php";
+        String register_url = "http://192.168.1.4/mypraxis/MyHealthCheck/register.php";
 
         if(type.equals("login")) {
 
@@ -95,6 +95,7 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
                 String amka_user = params[5];
                 String email_user = params[6];
                 String sosn= params[7];
+                String gender= params[8];
 
 
 
@@ -111,7 +112,8 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
                         +URLEncoder.encode("surname_user","UTF-8")+"="+URLEncoder.encode(surname_user,"UTF-8")+"&"
                         +URLEncoder.encode("amka_user","UTF-8")+"="+URLEncoder.encode(amka_user,"UTF-8")+"&"
                         +URLEncoder.encode("email_user","UTF-8")+"="+URLEncoder.encode(email_user,"UTF-8")+"&"
-                        +URLEncoder.encode("sosn","UTF-8")+"="+URLEncoder.encode(sosn,"UTF-8");
+                        +URLEncoder.encode("sosn","UTF-8")+"="+URLEncoder.encode(sosn,"UTF-8")+"&"
+                        +URLEncoder.encode("gender","UTF-8")+"="+URLEncoder.encode(gender,"UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();

@@ -45,16 +45,18 @@
                 android:layout_height="wrap_content">
 
                 <RadioButton
-                    android:id="@+id/doctor"
+                    android:id="@+id/male"
                     android:layout_width="134dp"
                     android:layout_height="wrap_content"
-                    android:text="Doctor" />
+                    android:text="Άντρας"
+                    android:onClick="onRadioButtonClicked"/>
 
                 <RadioButton
-                    android:id="@+id/patient"
+                    android:id="@+id/female"
                     android:layout_width="126dp"
                     android:layout_height="wrap_content"
-                    android:text="Patient" />
+                    android:text="Γυναίκα"
+                android:onClick="onRadioButtonClicked"/>
             </RadioGroup>
 
             <android.support.design.widget.TextInputLayout

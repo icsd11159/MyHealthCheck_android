@@ -96,29 +96,26 @@
         android:layout_alignParentStart="true"
         app:srcCompat="@mipmap/hos_pha" />
 
-    <EditText
+    <TextView
         android:id="@+id/editText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/button"
-        android:layout_marginTop="43dp"
+        android:layout_above="@+id/button2"
+        android:layout_alignEnd="@+id/button2"
+        android:layout_alignRight="@+id/button2"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Νοσοκομεια/Φαρμακεια"
         android:textColor="@android:color/holo_green_dark"
         android:textSize="10sp" />
 
-    <EditText
+    <TextView
         android:id="@+id/editText3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/btnLogout"
-        android:layout_alignStart="@+id/btnLogout"
-        android:layout_alignTop="@+id/button"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
+        android:layout_above="@+id/button"
+        android:layout_toEndOf="@+id/textView"
+        android:layout_toRightOf="@+id/textView"
         android:inputType="textPersonName"
         android:text="MENU"
         android:textColor="@android:color/holo_green_dark" />

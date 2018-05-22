@@ -377,7 +377,7 @@ function get_thesis_student_applied_for($link, $student_id)
     }
     return null;
 }
-function get_exam_by_client($link,  $id_d)
+function get_exam_by_client($link,  $id_d)//lathos: by doctor
 {
 
     $sql = "SELECT DISTINCT examines.* FROM examines WHERE examines.id_doctor = $id_d";
@@ -388,7 +388,84 @@ function get_exam_by_client($link,  $id_d)
     }
     return null;
 }
-
+function get_normal_ex($link,$type,$amka,$my_result,$id_ex )//lathos: by doctor
+{
+	$both="both";
+	 
+      $gender = "SELECT users.gender FROM users WHERE users.amka = $amka";
+	  
+	     $result1 = mysqli_query($link, $gender ) or die(mysqli_error( $gender ));
+		 $count1 = mysqli_num_rows($result1);
+		 
+    if ($count1 >= 1) {
+		 while ($row = $result1->fetch_assoc()) { 
+		 $gender= $row['gender'];
+ 	
+	$sql = "SELECT * FROM normal_numbers WHERE normal_numbers.type = '$type' AND (normal_numbers.gender='$gender' OR normal_numbers.gender='$both')";
+	
+    $result = mysqli_query($link, $sql) or die(mysqli_error($link));
+    $count = mysqli_num_rows($result);
+       if ($count >= 1) {
+	
+		   	 while ($row1 = $result->fetch_assoc()) { 
+			
+		     $normal_min=$row1['number_min'];
+			   $normal_max=$row1['number_max'];
+	           
+				$normal=$row1['name'];
+				 if(  (strpos(  $my_result,$normal)) !== false ){
+						 echo "result, ".$my_result." , name:".$row1['name'];  	   
+				$f= preg_replace('/[^0-9\.]/', "", $my_result); 
+				
+				echo $f; 
+					if($f>= $normal_min && $f<= $normal_max){
+						
+						 mysqli_commit($link);
+	
+						 $my_comments=" φυσιολογικές τιμές";
+	echo " id ,".$id_ex;
+    $sql = "UPDATE examines
+            SET comments='$my_comments'
+            WHERE examines.id_exam = $id_ex AND examines.text='$my_result'";
+    $result = mysqli_query($link, $sql);
+  
+   
+     if ($result) {
+         showAlertDialogMethod("Φυσιολογικές τιμές");
+       	   return $result;
+					
+					}
+					else{
+						  showAlertDialogMethod("Δεν εγγραφηκε τιποτα");
+					}
+					}
+					else{
+						 //mysqli_autocommit($link, false);
+    mysqli_commit($link);
+	$my_comments_not="μη φυσιολογικές τιμές";
+	$sql = "UPDATE examines
+            SET comments='$my_comments_not'
+            WHERE examines.id_exam = $id_ex AND examines.text='$my_result'";
+    $result = mysqli_query($link, $sql);
+	
+           if ($result) {
+         showAlertDialogMethod("Mη Φυσιολογικές τιμές");
+       	   return $result;
+					
+					}
+					else{
+						  showAlertDialogMethod("Δεν εγγραφηκε τιποτα");
+					}
+    return $result;
+						 
+					 }
+				
+    }
+	
+   
+		 }return null;}}	}
+ 
+	}
 function get_patient_with_keywords($link, $keyword_phrase)
 {
 

@@ -80,7 +80,7 @@ public class activity_examinations extends AppCompatActivity implements Serializ
         //  pdf.setVisibility(View.GONE);
         SessionManager s = new SessionManager(activity_examinations.this);
 
-        getJSON("http://192.168.1.2/mypraxis/MyHealthCheck/Api.php");
+        getJSON("http://192.168.1.4/mypraxis/MyHealthCheck/Api.php");
         //  String pdfname_url ="http://192.168.1.2/mypraxis/MyHealthCheck/pdfname.php";
     }
 

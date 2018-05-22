@@ -153,19 +153,33 @@ $date =  $_POST['date'];
     
                                    
                        if ($_POST['type']=="Ουρολογική"){
-                        echo '<option value="mini"> Mini check-up για ενήλικες</option>';
-						echo '<option value="anaimia1"> Έλεγχος αναιμίας Ι</option>';
-						echo '<option value="anaimia11"> Έλεγχος αναιμίας ΙΙ</option>';
-                        echo '<option value="anaimia111"> Έλεγχος αναιμίας ΙΙI</option>';
-					    echo '<option value="thuroeidhs"> Έλεγχος θυρεοειδούς ΙΙΙ</option>';
-					    echo '<option value="prosantres"> Έλεγχος προστάτη II (άνδρες >45 ετών)</option>';
-					    echo '<option value="antixa"> Anti XA</option>';
-					    echo '<option value="apcr"> APC-R</option>';
+                        echo '<option value="pH"> pH</option>';
+						echo '<option value="Ειδικό βάρος"> Ειδικό βάρος</option>';
+						echo '<option value="Νάτριο"> Νάτριο</option>';
+                        echo '<option value="Κάλιο"> Κάλιο</option>';
+					    echo '<option value="Χλώριο"> Χλώριο</option>';
+					    echo '<option value="Ασβέστιο"> Ασβέστιο</option>';
+					    echo '<option value="Φωσφόρος"> Φωσφόρος</option>';
+					    echo '<option value="Ουρία"> Ουρία</option>';
+							}
+							else if ($_POST['type']=="Αιματολογική"){
+						 echo '<option value="Ερυθρά Αιμοσφαίρια (RBC)"> Ερυθρά Αιμοσφαίρια (RBC)</option>';
+						echo '<option value="Αιμοσφαιρίνη (HGB)"> Αιμοσφαιρίνη (HGB)</option>';
+						echo '<option value="Αιματοκρίτης Ht"> Αιματοκρίτης Ht</option>';
+                        echo '<option value="Λευκά Αιμοσφαίρια (WBC)">Λευκά Αιμοσφαίρια (WBC)</option>';
+					    echo '<option value="Ουδετερόφιλα % (NEUT)</">Ουδετερόφιλα % (NEUT)</option>';
+					    echo '<option value="Ουδετερόφιλα (NEU)">Ουδετερόφιλα (NEU)</option>';
+					    echo '<option value="Λεμφοκύτταρα % (LYMPH)"> Λεμφοκύτταρα % (LYMPH)</option>';
+					    echo '<option value=" Ηωσινόφιλα %  (EO)"> Ηωσινόφιλα %  (EO)</option>';
 							}
 							else{
-								  echo '<option value="anaimia111"> Έλεγχος αναιμίας ΙΙI</option>';
-					    echo '<option value="thuroeidhs"> Έλεγχος θυρεοειδούς ΙΙΙ</option>';
+								echo '<option value="Ερυθρά Αιμοσφαίρια (RBC)"> Ερυθρά Αιμοσφαίρια (RBC)</option>';
+						echo '<option value="Αιμοσφαιρίνη (HGB)"> Αιμοσφαιρίνη (HGB)</option>';
+						echo '<option value="Αιματοκρίτης Ht"> Αιματοκρίτης Ht</option>';
+                        echo '<option value="Λευκά Αιμοσφαίρια (WBC)">Λευκά Αιμοσφαίρια (WBC)</option>';
 							}
+							
+			
 			     
                     ?>
                 </select>
@@ -175,7 +189,7 @@ $date =  $_POST['date'];
             </div>
         </div>
 
-		   
+		 
         <div class="form-group">
             <label for="amka">Αποτέλεσμα*:</label>
             <input required="required" type="text" class="form-control" id="result" name="result"

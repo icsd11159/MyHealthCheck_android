@@ -36,6 +36,11 @@ include_once "page_parts/login_checker.php";
         </center>
 	</form>
     <br>
+	 <form action="examines.php" method="post" enctype="multipart/form-data">
+	   <center>
+            <button type="submit" name="normal" class="btn btn-primary">Αυτόματη εισαγωγή φυσιολογικών τιμών</button>
+        </center>
+	</form>
     <br>
     <table class="table">
         <?php
@@ -363,6 +368,20 @@ echo '</form>';
                 }
             
         }
+		 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['normal'])) {
+			 $id_d= $_SESSION['user_id'];
+			 $all_examines= get_exam_by_client($link, $id_d );
+			  while ($row = $all_examines->fetch_assoc()) { 
+			 $my_result =$row['text'];
+			  $id_ex=$row['id_exam'];
+			  
+			 $examines=get_normal_ex($link,$row['type_ex'],$row['amka'],$my_result,$id_ex );
+		   
+				 
+			}}
+			  
+
+		 
         ?>
     </table>
 </div>
